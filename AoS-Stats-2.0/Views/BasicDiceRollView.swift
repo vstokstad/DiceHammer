@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import GameKit
+import CoreData
 import Combine
 class Dice: Identifiable, ObservableObject, Comparable {
    
