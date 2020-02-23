@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */; };
 		7C682D5923D324370028A496 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5823D324370028A496 /* AppDelegate.swift */; };
 		7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5A23D324370028A496 /* SceneDelegate.swift */; };
 		7C682D5E23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5C23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld */; };
@@ -16,6 +17,9 @@
 		7C682D6823D324380028A496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C682D6623D324380028A496 /* LaunchScreen.storyboard */; };
 		7C682D7323D324380028A496 /* AoS_Stats_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7223D324380028A496 /* AoS_Stats_2_0Tests.swift */; };
 		7C682D7E23D324380028A496 /* AoS_Stats_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */; };
+		7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D8B23D63CD40028A496 /* AvgDmg.swift */; };
+		7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92E5AD240053290017C838 /* BasicDiceRollView.swift */; };
+		7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9AC1823FF36FC001214AD /* AddProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SavedProfilesView.swift; path = "AoS-Stats-2.0/Views/SavedProfilesView.swift"; sourceTree = SOURCE_ROOT; };
 		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D5823D324370028A496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C682D5A23D324370028A496 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +56,9 @@
 		7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AoS-Stats-2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoS_Stats_2_0UITests.swift; sourceTree = "<group>"; };
 		7C682D7F23D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C682D8B23D63CD40028A496 /* AvgDmg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmg.swift; sourceTree = "<group>"; };
+		7C92E5AD240053290017C838 /* BasicDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDiceRollView.swift; sourceTree = "<group>"; };
+		7CF9AC1823FF36FC001214AD /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C61DD4C23FE6DD500F07CE9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7C682D5F23D324370028A496 /* ContentView.swift */,
+				7CF9AC1823FF36FC001214AD /* AddProfileView.swift */,
+				7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */,
+				7C92E5AD240053290017C838 /* BasicDiceRollView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C61DD4D23FE6DE700F07CE9 /* Calculations */ = {
+			isa = PBXGroup;
+			children = (
+				7C682D8B23D63CD40028A496 /* AvgDmg.swift */,
+			);
+			path = Calculations;
+			sourceTree = "<group>";
+		};
 		7C682D4C23D324370028A496 = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +128,10 @@
 		7C682D5723D324370028A496 /* AoS-Stats-2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				7C61DD4D23FE6DE700F07CE9 /* Calculations */,
+				7C61DD4C23FE6DD500F07CE9 /* Views */,
 				7C682D5823D324370028A496 /* AppDelegate.swift */,
 				7C682D5A23D324370028A496 /* SceneDelegate.swift */,
-				7C682D5F23D324370028A496 /* ContentView.swift */,
 				7C682D6123D324380028A496 /* Assets.xcassets */,
 				7C682D6623D324380028A496 /* LaunchScreen.storyboard */,
 				7C682D6923D324380028A496 /* Info.plist */,
@@ -270,9 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */,
 				7C682D5E23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld in Sources */,
 				7C682D5923D324370028A496 /* AppDelegate.swift in Sources */,
 				7C682D6023D324370028A496 /* ContentView.swift in Sources */,
+				7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */,
+				7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */,
+				7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */,
 				7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
