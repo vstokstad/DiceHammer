@@ -9,123 +9,162 @@
 import Foundation
 import SwiftUI
 import GameKit
-import CoreData
 import Combine
 
 struct BasicDiceRollView: View {
     @Environment(\.managedObjectContext) var moc
-    
-    @FetchRequest(entity: HitRolls.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \HitRolls.objectID, ascending: false)]) var hitRolls: FetchedResults<HitRolls>
-    @FetchRequest(entity: WoundRolls.entity(), sortDescriptors: []) var woundRolls: FetchedResults<WoundRolls>
-   
-    @State var dice = 2
-    @State private var toHit = 4
-    @State private var toWound = 4
-    @State private var toSave = 4
-    @State private var hits = 0
-    
-    func d6() -> Int16
-    {
-        return Int16.random(in: 1...6)
-    }
-
-    func deleteHitRoll(at offsets: IndexSet) {
-        for offset in offsets {
-            let hitRoll = hitRolls[offset]
-            moc.delete(hitRoll)
-              try? moc.save()
+  
+    @State private var dice = 10.0
+    @State public var diceToSave = 4
+    @State public var hitRolls = [Int]()
+    @State private var diceRange = 1...6
+    @State private var hits: Int = 0
+    @State private var diceSlider: Double = 3.0
+    @State private var color: Color = .green
+  
+    func DiceToKeep(diceRoll: Int) -> Int {
+        if diceRoll >= diceToSave {
+            
+            hits += 1
         }
+        else {
+            
+            hits -= 1
+            
+        }
+        return hits
     }
-    func hitCalc(at offsets: IndexSet) {
-            for offset in offsets {
-                let hitRoll = hitRolls[offset]
-                if hitRoll.hitRoll >= Int16(self.toHit) {
+    func DiceImage(diceRoll: Int) -> some View {
+        var diceColor: Color
+    
+        if diceRoll >= diceToSave {
+            diceColor = .green
+            color = .green
+            hits += 1
+        }
+            else {
+            diceColor = .red
+            color = .red
+            hits -= 1
+                  
+            }
+        let diceImage: some View = Image(systemName: "\(diceRoll).square").foregroundColor(diceColor).imageScale(.large)
+        return diceImage
+    }
+    func d6() -> Int
+    {
+        return Int.random(in: 1...6)
+    }
+    func Roll(dice: Int) {
+       
+        hits = 0
+  
+        self.hitRolls.removeAll(keepingCapacity: false)
+     
+        for _ in 0..<dice {
+        let diceRoll = d6()
+            if hitRolls.isEmpty {
+                hitRolls.insert(diceRoll, at: 0)
+                    if diceRoll >= diceToSave {
+                        hits += 1
+                    }
+            }
+            else {
+                hitRolls.append(diceRoll)
+                if diceRoll >= diceToSave {
                     hits += 1
                 }
-              
+           
             }
+         
         }
+       hitRolls.sort()
+//        return hitRolls
+        
+    }
 
+    func DiceSlideConvert(slideValue: CGFloat) -> Int{
+       return slideValue.exponent
+    }
   
-    
+   
     
     var body: some View {
         NavigationView{
             Form{
                 Section{
-                    Picker(selection: $dice, label: Text("Dice")) {
-                        ForEach(0..<200) {
-                            Text("\($0)")
-                        }
+                    HStack{
+                        Stepper("Dice", value: $dice, in: 1...14)
+                            .labelsHidden()
                         
+                        Spacer()
+                        Text("Number of dice: \(dice, specifier: "%.0f")")
                     }
+                    
+                    Slider(value: $dice, in: 1...14, step: 1.0)
                 }
+             
                 Section{
-                    List {
-                        ForEach(self.hitRolls, id: \.id) { hitRoll in
-                        VStack{
-                            Text("Hit Roll: \(hitRoll.hitRoll)")
-                                .font(.headline)
+                   
+                        if hitRolls.isEmpty {
+                            Text("No Rolls")
+                        }
+                        else {
+                            VStack{
+                                ForEach(0..<Int(dice), id: \.self) { die in
+                                    
+                                    HStack{
+//                                    ForEach(self.hitRolls, id: \.self) { roll in
+//                                        Roll(dice: Int(dice))
+                                        self.DiceImage(diceRoll: self.hitRolls[die])
+                                    }
+                                }
+                                       
+                                
+                            }
+                                      
+                                
+                        
                             
-                        }
-                         
-                        }
-                        .onDelete(perform: deleteHitRoll)
-                                            
+                                
+                        
                         }
                     }
                 
+                  
+                
+                
+                
                 Section{
+ //                    Picker för att välja vilka slag som ska sparas
                     HStack{
-                        Button("Roll Hits") {
-                            var i = 0
-                            while(self.dice > i) {
-                                let hitRoll = HitRolls(context: self.moc)
-                                hitRoll.id = UUID()
-                                hitRoll.hitRoll = Int16(self.d6())
-                                try? self.moc.save()
-                                i += 1
-                                if hitRoll.hitRoll > Int16(self.toHit) {
-                                    self.hits += 1
-                                }
-                            }
-                            self.hitCalc(at: IndexSet())
-                           
-                }
+                        Stepper("Dice roll to keep", value: $diceToSave, in: 1...6)
+                            .labelsHidden()
+                          
                         Spacer()
-                        
-                        Text("Hits: \(hits)")
-//              Rerolla ettor, assign nytt värde till hitRoll
-//                        Button("Reroll 1s") {
-//                            ForEach(hitRolls, id: \.id) { hitroll in
-////                                let hitRoll = HitRolls(context: self.moc)
-//
-//                                if(hitRoll.hitRoll == Int16(1)) {
-//                                    hitRoll.hitRoll = self.d6()
-//
-//                                }
-//
-//                            }
-//                        }
+                        Text("Dice roll to keep \(diceToSave)+")
                     }
-//                    Picker för att välja vilka slag som ska sparas
-                    Picker(selection: $toHit, label: Text("Hit rolls to keep")) {
-                        ForEach(0..<7) {
-                            Text("\($0)")
+                    HStack{
+//                  HitRoll Button
+                        Button("Roll Hits") {
+                            self.Roll(dice: Int(self.dice))
                         }
-                       
+                        Spacer()
+                     
+                        Text("Kept dice: \(hits)")
                     }
-                .pickerStyle(SegmentedPickerStyle())
+                }
+             
+                    
+                   
+                
+
+               
                     
                 }
-                
-                }
-        
             .navigationBarTitle("Basic Dice Roll")
-        .navigationBarItems(leading: EditButton())
+            }
         }
-        }
-        
     }
 
    
@@ -135,7 +174,6 @@ struct BasicDiceRollView: View {
 struct BasicDiceRollView_Previews: PreviewProvider {
     static var previews: some View {
      
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        return BasicDiceRollView().environment(\.managedObjectContext, context)
+      BasicDiceRollView()
     }
 }

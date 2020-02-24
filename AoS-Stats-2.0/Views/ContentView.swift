@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.editMode) var editMode
    
-    @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
+    @FetchRequest(entity: Unit.entity(), sortDescriptors: [NSSortDescriptor.init(key: "name", ascending: true)]) var units: FetchedResults<Unit>
 @State private var addProfileViewShowing = false
     @State private var savedProfilesViewShowing = false
     @State private var selection: Int = 0
