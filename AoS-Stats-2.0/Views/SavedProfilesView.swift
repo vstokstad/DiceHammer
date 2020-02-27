@@ -18,6 +18,7 @@ struct SavedProfilesView: View {
     @Environment(\.editMode) var editMode
     
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
+    @FetchRequest(entity: CombinedUnit.entity(), sortDescriptors: []) var combinedUnits: FetchedResults<CombinedUnit>
     func deleteProfile(at offsets: IndexSet) {
         for offset in offsets {
             let unit = units[offset]
@@ -26,28 +27,61 @@ struct SavedProfilesView: View {
         
         try? moc.save()
     }
+    func deleteCombined(at offsets: IndexSet) {
+        for offset in offsets {
+            let unit = combinedUnits[offset]
+            moc.delete(unit)
+        }
+        try? moc.save()
+    }
     var body: some View {
         NavigationView{
         VStack{
             List {
-                ForEach(self.units, id: \.id) { unit in
+                Section{
+                    ForEach(self.combinedUnits, id: \.combineId) { combinedUnit in
+                        VStack{
+                            Text("\(combinedUnit.combineName ?? "noName Unit")")
+                                .font(.headline)
+                            Text("Avg Dmg: \(combinedUnit.totalAvgDmg, specifier: "%.2f")")
+                                .font(.subheadline)
+                            ForEach({ ()-> [Unit] in
+                                var subUnits: [Unit] = []
+                                for unit in self.units {
+                                    if unit.id == combinedUnit.combineId {
+                                    subUnits.append(unit)
+                                    }
+                                }
+                                return subUnits
+                            }(), id: \.self) { _ in
+								Text("profiles: \(combinedUnit.combineName ?? "")")
+                            }
+                            }
+                        
+                    }
+                    .onDelete(perform: deleteCombined)
+                }
+               
+                
+                Section{
+                    ForEach(self.units, id: \.id) { unit in
                     VStack{
-               Text("Profile Name: \(unit.name ?? "noName profile")")
-                .font(.headline)
+                        Text("\(unit.name ?? "noName profile")")
+                            .font(.headline)
                       
                         HStack{
-                        Text("Attacks: \(unit.attacks)")
-                    Text("To Hit: \(unit.toHit)")
+                            Text("Attacks: \(unit.attacks)")
+                            Text("To Hit: \(unit.toHit)")
                         }
                         HStack{
-                    Text("To Wound: \(unit.toWound)")
-                    Text("To Rend: \(unit.toRend)")
+                            Text("To Wound: \(unit.toWound)")
+                            Text("To Rend: \(unit.toRend)")
                         }
                         HStack{
-                    Text("To Save: \(unit.toSave)")
-                    Text("Damage: \(unit.damage)")
+                            Text("To Save: \(unit.toSave)")
+                            Text("Damage: \(unit.damage)")
                         }
-                        Text("Avg Dmg: \(unit.avgDmg, specifier: "%.2f")")
+                            Text("Avg Dmg: \(unit.avgDmg, specifier: "%.2f")")
                     .font(.headline)
                     .underline()
                         }
@@ -58,14 +92,17 @@ struct SavedProfilesView: View {
                 }
            
             }
+           
+            }
+        
         .navigationBarTitle("Saved Profiles")
         .navigationBarItems(leading: EditButton(), trailing:  Button("Back") {
             self.presentationMode.wrappedValue.dismiss()
             })
-            
+        }
         }
     }
-        }
+        
 
 
 

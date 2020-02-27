@@ -10,82 +10,81 @@ import Foundation
 import SwiftUI
 import GameKit
 import Combine
-
-struct BasicDiceRollView: View {
-    @Environment(\.managedObjectContext) var moc
-  
-    @State private var dice = 10.0
-    @State public var diceToSave = 4
-    @State public var hitRolls = [Int]()
-    @State private var diceRange = 1...6
-    @State private var hits: Int = 0
-    @State private var diceSlider: Double = 3.0
-    @State private var color: Color = .green
-  
-    func DiceToKeep(diceRoll: Int) -> Int {
-        if diceRoll >= diceToSave {
-            
-            hits += 1
+class Dice: Identifiable, ObservableObject, Comparable {
+   
+    
+    @Published var id = UUID()
+    @Published var value = 1
+    @Published var color = Color.gray
+    @Published var image = Image(systemName: "0.square")
+    @Published var diceToSave = Int()
+    private var d6 = {() -> Int in Int.random(in: 1...6)}
+    static func < (lhs: Dice, rhs: Dice) -> Bool {
+        if lhs.value != rhs.value {
+            return lhs.value < rhs.value
         }
         else {
-            
-            hits -= 1
-            
+            return lhs.value > rhs.value
         }
-        return hits
     }
-    func DiceImage(diceRoll: Int) -> some View {
-        var diceColor: Color
     
-        if diceRoll >= diceToSave {
-            diceColor = .green
-            color = .green
+    static func == (lhs: Dice, rhs: Dice) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
+    init(diceToSave: Int) {
+        self.diceToSave = diceToSave
+        self.value = d6()
+        self.image = Image(systemName: "\(value).square")
+        
+        return
+    }
+     
+ 
+  
+    
+}
+struct BasicDiceRollView: View {
+    @Environment(\.managedObjectContext) var moc
+    private var red = Color.red
+    private var green = Color.green
+    @State private var numberOfDice: Double = 10.0
+    @State private var diceToSave = 4
+    @State var hitRolls: [Dice] = [Dice(diceToSave: 0)]
+    @State private var hits: Int = 0
+//    @State private var diceSlider: Double = 10.0
+    private var diceRange = 1.0...100.0
+    
+    func hitCalc(dice: Dice) {
+        if dice.value >= diceToSave {
             hits += 1
         }
-            else {
-            diceColor = .red
-            color = .red
-            hits -= 1
-                  
-            }
-        let diceImage: some View = Image(systemName: "\(diceRoll).square").foregroundColor(diceColor).imageScale(.large)
-        return diceImage
-    }
-    func d6() -> Int
-    {
-        return Int.random(in: 1...6)
-    }
-    func Roll(dice: Int) {
-       
-        hits = 0
-  
-        self.hitRolls.removeAll(keepingCapacity: false)
-     
-        for _ in 0..<dice {
-        let diceRoll = d6()
-            if hitRolls.isEmpty {
-                hitRolls.insert(diceRoll, at: 0)
-                    if diceRoll >= diceToSave {
-                        hits += 1
-                    }
-            }
-            else {
-                hitRolls.append(diceRoll)
-                if diceRoll >= diceToSave {
-                    hits += 1
-                }
-           
-            }
-         
-        }
-       hitRolls.sort()
-//        return hitRolls
         
     }
 
-    func DiceSlideConvert(slideValue: CGFloat) -> Int{
-       return slideValue.exponent
+    func Roll(numberOfDice: Int, diceToSave: Int) {
+//Resets values
+        hits = 0
+        self.hitRolls.removeAll(keepingCapacity: false)
+//        For each dice add a diceObjet
+        for _ in 0...numberOfDice {
+            if hitRolls.isEmpty {
+                hitRolls.insert(Dice(diceToSave: diceToSave), at: 0)
+            }
+            else {
+                hitRolls.append(Dice(diceToSave: diceToSave))
+            }
+        }
+
+        
+       hitRolls.sort()
+
+
     }
+
+//    func DiceSlideConvert(slideValue: CGFloat) -> Int{
+//       return slideValue.exponent
+//    }
   
    
     
@@ -94,42 +93,48 @@ struct BasicDiceRollView: View {
             Form{
                 Section{
                     HStack{
-                        Stepper("Dice", value: $dice, in: 1...14)
+                        Stepper("Dice", value: $numberOfDice.animation(), in: diceRange)
                             .labelsHidden()
                         
                         Spacer()
-                        Text("Number of dice: \(dice, specifier: "%.0f")")
+                        Text("Number of dice: \(numberOfDice, specifier: "%.0f")")
                     }
                     
-                    Slider(value: $dice, in: 1...14, step: 1.0)
+                    Slider(value: $numberOfDice, in: diceRange, step: 1.0)
                 }
              
                 Section{
-                   
-                        if hitRolls.isEmpty {
-                            Text("No Rolls")
-                        }
-                        else {
+                    
+                        ForEach(self.hitRolls, id: \.id) { dice in
                             VStack{
-                                ForEach(0..<Int(dice), id: \.self) { die in
-                                    
-                                    HStack{
-//                                    ForEach(self.hitRolls, id: \.self) { roll in
-//                                        Roll(dice: Int(dice))
-                                        self.DiceImage(diceRoll: self.hitRolls[die])
-                                    }
-                                }
-                                       
+                               
+                                        dice.image
+                                            .foregroundColor({ () -> Color in
+                                                if dice.value < self.diceToSave {
+                                                    return self.red
+                                                }
+                                                else {
+                                                    return self.green
+                                                }
+                                            }())  .padding()
+                              
                                 
+                                
+                            
                             }
-                                      
-                                
+                            .imageScale(.large)
+                        
                         
                             
-                                
                         
                         }
-                    }
+                     
+                                       
+                    
+                              Text("Kept dice: \(self.hits)")
+                            
+                        
+                }
                 
                   
                 
@@ -138,20 +143,26 @@ struct BasicDiceRollView: View {
                 Section{
  //                    Picker för att välja vilka slag som ska sparas
                     HStack{
-                        Stepper("Dice roll to keep", value: $diceToSave, in: 1...6)
+                        Stepper("Dice roll to keep", value: $diceToSave.animation(), in: 1...6)
                             .labelsHidden()
+                            
                           
                         Spacer()
                         Text("Dice roll to keep \(diceToSave)+")
                     }
                     HStack{
-//                  HitRoll Button
+                Spacer()
                         Button("Roll Hits") {
-                            self.Roll(dice: Int(self.dice))
+                           
+                            self.Roll(numberOfDice: Int(self.numberOfDice), diceToSave: self.diceToSave)
+                          
+                            
                         }
+                        .font(.title)
+                       
                         Spacer()
                      
-                        Text("Kept dice: \(hits)")
+                       
                     }
                 }
              
@@ -163,7 +174,9 @@ struct BasicDiceRollView: View {
                     
                 }
             .navigationBarTitle("Basic Dice Roll")
+             
             }
+   
         }
     }
 
@@ -172,8 +185,9 @@ struct BasicDiceRollView: View {
 
 
 struct BasicDiceRollView_Previews: PreviewProvider {
+  
     static var previews: some View {
-     
-      BasicDiceRollView()
+       BasicDiceRollView()
+        
     }
 }

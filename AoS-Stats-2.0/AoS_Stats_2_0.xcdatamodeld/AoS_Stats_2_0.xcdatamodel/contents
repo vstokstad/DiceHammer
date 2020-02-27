@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Unit" representedClassName="Unit" syncable="YES" codeGenerationType="class">
+    <entity name="CombinedUnit" representedClassName="CombinedUnit" syncable="YES" codeGenerationType="class">
+        <attribute name="combineId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="combineName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="totalAvgDmg" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="toUnitRel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="toCombineRel" inverseEntity="Unit"/>
+    </entity>
+    <entity name="Unit" representedClassName="Unit" parentEntity="CombinedUnit" syncable="YES" codeGenerationType="class">
         <attribute name="attacks" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="avgDmg" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="damage" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -10,9 +16,10 @@
         <attribute name="toRend" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="toSave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="toWound" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="relationship" inverseEntity="Unit"/>
+        <relationship name="toCombineRel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CombinedUnit" inverseName="toUnitRel" inverseEntity="CombinedUnit"/>
     </entity>
     <elements>
+        <element name="CombinedUnit" positionX="-27" positionY="126" width="128" height="103"/>
         <element name="Unit" positionX="-36" positionY="36" width="128" height="193"/>
     </elements>
 </model>

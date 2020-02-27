@@ -19,6 +19,8 @@
 		7C682D7E23D324380028A496 /* AoS_Stats_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */; };
 		7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D8B23D63CD40028A496 /* AvgDmg.swift */; };
 		7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92E5AD240053290017C838 /* BasicDiceRollView.swift */; };
+		7CBF7D792406677B003E2A05 /* DiceRolls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D782406677B003E2A05 /* DiceRolls.swift */; };
+		7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */; };
 		7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9AC1823FF36FC001214AD /* AddProfileView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		7C682D7F23D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C682D8B23D63CD40028A496 /* AvgDmg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmg.swift; sourceTree = "<group>"; };
 		7C92E5AD240053290017C838 /* BasicDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDiceRollView.swift; sourceTree = "<group>"; };
+		7CBF7D782406677B003E2A05 /* DiceRolls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRolls.swift; sourceTree = "<group>"; };
+		7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineProfileView.swift; sourceTree = "<group>"; };
 		7CF9AC1823FF36FC001214AD /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,7 @@
 				7C682D5F23D324370028A496 /* ContentView.swift */,
 				7CF9AC1823FF36FC001214AD /* AddProfileView.swift */,
 				7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */,
+				7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */,
 				7C92E5AD240053290017C838 /* BasicDiceRollView.swift */,
 			);
 			path = Views;
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				7C682D8B23D63CD40028A496 /* AvgDmg.swift */,
+				7CBF7D782406677B003E2A05 /* DiceRolls.swift */,
 			);
 			path = Calculations;
 			sourceTree = "<group>";
@@ -299,6 +305,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */,
+				7CBF7D792406677B003E2A05 /* DiceRolls.swift in Sources */,
+				7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */,
 				7C682D5E23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld in Sources */,
 				7C682D5923D324370028A496 /* AppDelegate.swift in Sources */,
 				7C682D6023D324370028A496 /* ContentView.swift in Sources */,
@@ -482,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -502,7 +510,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

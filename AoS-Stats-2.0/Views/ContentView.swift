@@ -9,14 +9,16 @@ import Foundation
 import SwiftUI
 import GameKit
 import CoreData
+import ARKit
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.editMode) var editMode
    
     @FetchRequest(entity: Unit.entity(), sortDescriptors: [NSSortDescriptor.init(key: "name", ascending: true)]) var units: FetchedResults<Unit>
-@State private var addProfileViewShowing = false
+    @State private var addProfileViewShowing = false
     @State private var savedProfilesViewShowing = false
+    @State private var comBineProfileViewShowing = false
     @State private var selection: Int = 0
     @ObservedObject var avgDmg = AvgDmg()
     var d6 = Int.random(in: 1...6)
@@ -99,8 +101,8 @@ struct ContentView: View {
               .pickerStyle(SegmentedPickerStyle())
 //                .disabled(d3Toggle)
            
-                
-       
+               
+       Divider()
                 HStack{
                     Text("Average Damage Output:")
                         .font(.headline)
@@ -108,28 +110,39 @@ struct ContentView: View {
                  Text("\(avgDmg.calc(attacks: Double(attacks), toHit: Double(toHit), toWound: Double(toWound), toRend: Double(toRend), damage: Double(damage), toSave: Double(toSave)), specifier: "%.2f")")
                 .fontWeight(.bold)
                 .font(.title)
-                    .underline()
-                    }}
+                   
+                    }
               
             Spacer()
-            HStack{
-               
+                HStack(alignment: .top, spacing: 1.0){
+                Spacer()
             Button(action:  {
-                
                 self.addProfileViewShowing.toggle()
-                
-                
             }) {
                 VStack {
-                Image(systemName: "tray.and.arrow.down.fill")
+                Image(systemName: "square.and.arrow.down.fill")
                 Text("Save Profile")
                 }
                 }
             .sheet(isPresented: self.$addProfileViewShowing) {
                 AddProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: Double(self.attacks), toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
                 }
-            .padding()
-                
+       Spacer()
+                Button(action: {
+                    self.comBineProfileViewShowing.toggle()
+                }) {
+                    VStack{
+                        Image(systemName: "square.and.arrow.down.on.square.fill")
+                        Text("Add to \nexisting Profile")
+                        
+                    }
+                    .multilineTextAlignment(.center)
+                }
+                .sheet(isPresented: self.$comBineProfileViewShowing) {
+                    CombineProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: Double(self.attacks), toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
+                }
+                .disabled(units.isEmpty)
+                Spacer()
                 Button(action:  {
                     self.savedProfilesViewShowing.toggle()
                 }) {
@@ -141,11 +154,14 @@ struct ContentView: View {
                         SavedProfilesView().environment(\.managedObjectContext, self.moc)
                 }
                 .disabled(units.isEmpty)
-            .padding()
+        Spacer()
                 
-          
+                }
+                .allowsTightening(true)
+                .font(.subheadline)
+                Spacer()
                   }
-            Spacer()
+            
          }
          .tabItem
             {
@@ -157,7 +173,7 @@ struct ContentView: View {
                 .tag(0)
                 
               
-                  BasicDiceRollView().environment(\.managedObjectContext, self.moc)
+                BasicDiceRollView().environment(\.managedObjectContext, self.moc)
 
                 
             .tabItem {
@@ -168,8 +184,10 @@ struct ContentView: View {
                 }
                 .tag(1)
                 
-                Text("Third View")
-                    .font(.title)
+                VStack{
+                  Text("Third View")
+                }
+                
                     
                     .tabItem {
                         VStack {
