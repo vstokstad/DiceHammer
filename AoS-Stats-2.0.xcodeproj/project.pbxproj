@@ -19,6 +19,12 @@
 		7C682D7E23D324380028A496 /* AoS_Stats_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */; };
 		7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D8B23D63CD40028A496 /* AvgDmg.swift */; };
 		7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92E5AD240053290017C838 /* BasicDiceRollView.swift */; };
+		7CB12D572409073400B7A858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D562409073400B7A858 /* AppDelegate.swift */; };
+		7CB12D592409073400B7A858 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D582409073400B7A858 /* SceneDelegate.swift */; };
+		7CB12D5B2409073400B7A858 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D5A2409073400B7A858 /* ContentView.swift */; };
+		7CB12D5D2409073500B7A858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CB12D5C2409073500B7A858 /* Assets.xcassets */; };
+		7CB12D602409073500B7A858 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CB12D5F2409073500B7A858 /* Preview Assets.xcassets */; };
+		7CB12D632409073500B7A858 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB12D612409073500B7A858 /* LaunchScreen.storyboard */; };
 		7CBF7D792406677B003E2A05 /* DiceRolls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D782406677B003E2A05 /* DiceRolls.swift */; };
 		7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */; };
 		7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9AC1823FF36FC001214AD /* AddProfileView.swift */; };
@@ -60,6 +66,14 @@
 		7C682D7F23D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C682D8B23D63CD40028A496 /* AvgDmg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmg.swift; sourceTree = "<group>"; };
 		7C92E5AD240053290017C838 /* BasicDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDiceRollView.swift; sourceTree = "<group>"; };
+		7CB12D542409073400B7A858 /* NeoMorph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoMorph.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CB12D562409073400B7A858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7CB12D582409073400B7A858 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7CB12D5A2409073400B7A858 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7CB12D5C2409073500B7A858 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7CB12D5F2409073500B7A858 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7CB12D622409073500B7A858 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7CB12D642409073500B7A858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CBF7D782406677B003E2A05 /* DiceRolls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRolls.swift; sourceTree = "<group>"; };
 		7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineProfileView.swift; sourceTree = "<group>"; };
 		7CF9AC1823FF36FC001214AD /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
@@ -81,6 +95,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7C682D7623D324380028A496 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CB12D512409073400B7A858 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -117,6 +138,7 @@
 				7C682D5723D324370028A496 /* AoS-Stats-2.0 */,
 				7C682D7123D324380028A496 /* AoS-Stats-2.0Tests */,
 				7C682D7C23D324380028A496 /* AoS-Stats-2.0UITests */,
+				7CB12D552409073400B7A858 /* NeoMorph */,
 				7C682D5623D324370028A496 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,6 +149,7 @@
 				7C682D5523D324370028A496 /* AoS-Stats-2.0.app */,
 				7C682D6E23D324380028A496 /* AoS-Stats-2.0Tests.xctest */,
 				7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */,
+				7CB12D542409073400B7A858 /* NeoMorph.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +194,28 @@
 				7C682D7F23D324380028A496 /* Info.plist */,
 			);
 			path = "AoS-Stats-2.0UITests";
+			sourceTree = "<group>";
+		};
+		7CB12D552409073400B7A858 /* NeoMorph */ = {
+			isa = PBXGroup;
+			children = (
+				7CB12D562409073400B7A858 /* AppDelegate.swift */,
+				7CB12D582409073400B7A858 /* SceneDelegate.swift */,
+				7CB12D5A2409073400B7A858 /* ContentView.swift */,
+				7CB12D5C2409073500B7A858 /* Assets.xcassets */,
+				7CB12D612409073500B7A858 /* LaunchScreen.storyboard */,
+				7CB12D642409073500B7A858 /* Info.plist */,
+				7CB12D5E2409073500B7A858 /* Preview Content */,
+			);
+			path = NeoMorph;
+			sourceTree = "<group>";
+		};
+		7CB12D5E2409073500B7A858 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7CB12D5F2409073500B7A858 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +274,23 @@
 			productReference = 7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		7CB12D532409073400B7A858 /* NeoMorph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CB12D652409073500B7A858 /* Build configuration list for PBXNativeTarget "NeoMorph" */;
+			buildPhases = (
+				7CB12D502409073400B7A858 /* Sources */,
+				7CB12D512409073400B7A858 /* Frameworks */,
+				7CB12D522409073400B7A858 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NeoMorph;
+			productName = NeoMorph;
+			productReference = 7CB12D542409073400B7A858 /* NeoMorph.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -250,6 +312,9 @@
 						CreatedOnToolsVersion = 11.3.1;
 						TestTargetID = 7C682D5423D324370028A496;
 					};
+					7CB12D532409073400B7A858 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 				};
 			};
 			buildConfigurationList = 7C682D5023D324370028A496 /* Build configuration list for PBXProject "AoS-Stats-2.0" */;
@@ -268,6 +333,7 @@
 				7C682D5423D324370028A496 /* AoS-Stats-2.0 */,
 				7C682D6D23D324380028A496 /* AoS-Stats-2.0Tests */,
 				7C682D7823D324380028A496 /* AoS-Stats-2.0UITests */,
+				7CB12D532409073400B7A858 /* NeoMorph */,
 			);
 		};
 /* End PBXProject section */
@@ -294,6 +360,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CB12D522409073400B7A858 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CB12D632409073500B7A858 /* LaunchScreen.storyboard in Resources */,
+				7CB12D602409073500B7A858 /* Preview Assets.xcassets in Resources */,
+				7CB12D5D2409073500B7A858 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +409,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7CB12D502409073400B7A858 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CB12D572409073400B7A858 /* AppDelegate.swift in Sources */,
+				7CB12D592409073400B7A858 /* SceneDelegate.swift in Sources */,
+				7CB12D5B2409073400B7A858 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -353,6 +439,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C682D6723D324380028A496 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7CB12D612409073500B7A858 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CB12D622409073500B7A858 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -478,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AoS-Stats-2.0/Preview Content\"";
 				DEVELOPMENT_TEAM = GMM4866YZR;
@@ -498,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"AoS-Stats-2.0/Preview Content\"";
 				DEVELOPMENT_TEAM = GMM4866YZR;
@@ -598,6 +694,50 @@
 			};
 			name = Release;
 		};
+		7CB12D662409073500B7A858 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"NeoMorph/Preview Content\"";
+				DEVELOPMENT_TEAM = GMM4866YZR;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = NeoMorph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.NeoMorph";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7CB12D672409073500B7A858 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"NeoMorph/Preview Content\"";
+				DEVELOPMENT_TEAM = GMM4866YZR;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = NeoMorph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.NeoMorph";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -633,6 +773,15 @@
 			buildConfigurations = (
 				7C682D8923D324380028A496 /* Debug */,
 				7C682D8A23D324380028A496 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CB12D652409073500B7A858 /* Build configuration list for PBXNativeTarget "NeoMorph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CB12D662409073500B7A858 /* Debug */,
+				7CB12D672409073500B7A858 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

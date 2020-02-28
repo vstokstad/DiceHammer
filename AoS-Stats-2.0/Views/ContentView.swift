@@ -15,7 +15,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.editMode) var editMode
    
-    @FetchRequest(entity: Unit.entity(), sortDescriptors: [NSSortDescriptor.init(key: "name", ascending: true)]) var units: FetchedResults<Unit>
+    @FetchRequest(entity: Weapon.entity(), sortDescriptors: [NSSortDescriptor.init(key: "name", ascending: true)]) var units: FetchedResults<Weapon>
     @State private var addProfileViewShowing = false
     @State private var savedProfilesViewShowing = false
     @State private var comBineProfileViewShowing = false
@@ -42,7 +42,7 @@ struct ContentView: View {
                 .bold()
             Spacer()
             VStack{
-              
+			
             Text("Attacks")
                 Picker(selection: $attacks, label: Text("Attacks")) {
                   ForEach(0..<100) {

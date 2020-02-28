@@ -16,9 +16,9 @@ struct CombineProfileView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.editMode) var editMode
+    @FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
-    @FetchRequest(entity: CombinedUnit.entity(), sortDescriptors: []) var combinedUnits: FetchedResults<CombinedUnit>
-    func deleteProfile(at offsets: IndexSet) {
+    func deleteUnit(at offsets: IndexSet) {
         for offset in offsets {
             let unit = units[offset]
             moc.delete(unit)
@@ -44,18 +44,18 @@ struct CombineProfileView: View {
             Form{
                 Section{
                     VStack{
-						if combinedUnits.isEmpty {
-                            Picker(selection: $unitSelect, label: Text(units[unitSelect].name ?? "Select Unit")){
-                                ForEach(self.units, id: \.id) { unit in
-                                    Text("\(unit.name ?? "No saved profiles")")
+						if units.isEmpty {
+                            Picker(selection: $unitSelect, label: Text(weapons[unitSelect].name ?? "Select Unit")){
+                                ForEach(self.weapons, id: \.id) { weapon in
+                                    Text("\(weapon.name ?? "No saved profiles")")
                                 
                                 }
                             }
                         }
                         else {
-                            Picker(selection: $unitSelect, label: Text(combinedUnits[unitSelect].combineName ?? "Select Unit")){
-                                ForEach(self.combinedUnits, id: \.combineId) { unit in
-                                    Text("\(unit.combineName ?? "No saved profiles")")
+                            Picker(selection: $unitSelect, label: Text(units[unitSelect].name ?? "Select Unit")){
+                                ForEach(self.units, id: \.id) { unit in
+                                    Text("\(unit.name ?? "No saved profiles")")
                                     
                                 }
                             }
@@ -80,24 +80,24 @@ struct CombineProfileView: View {
                 Button("Save Profile")
                 {
                     let unit = Unit(context: self.moc)
-                    let combinedUnit = CombinedUnit(context: self.moc)
-                    unit.id = UUID()
-                    unit.name = self.unitName
-                    unit.toSave = Int16(self.toSave)
-                    unit.toRend = Int16(self.toRend)
-                    unit.attacks = Int16(self.attacks)
-                    unit.toWound = Int16(self.toWound)
-                    unit.toHit = Int16(self.toHit)
-                    unit.damage = Int16(self.damage)
-                    unit.avgDmg = Double(self.avgDmg)
-                    if combinedUnit.combineName != self.combinedName || self.combinedName != "" {
-                    combinedUnit.combineId = UUID()
-                    combinedUnit.combineName = self.combinedName
-                    combinedUnit.totalAvgDmg = (Double(self.avgDmg) + Double(self.units[self.unitSelect].avgDmg))
+                    let weapon = Weapon(context: self.moc)
+                    weapon.id = UUID()
+                    weapon.name = self.unitName
+                    weapon.toSave = Int16(self.toSave)
+                    weapon.toRend = Int16(self.toRend)
+                    weapon.attacks = Int16(self.attacks)
+                    weapon.toWound = Int16(self.toWound)
+                    weapon.toHit = Int16(self.toHit)
+                    weapon.damage = Int16(self.damage)
+                    weapon.avgDmg = Double(self.avgDmg)
+                    if unit.name != self.combinedName || self.combinedName != "" {
+					unit.id = UUID()
+                    unit.name = self.combinedName
+                    unit.totalAvgDmg = (Double(self.avgDmg) + Double(self.weapons[self.unitSelect].avgDmg))
 						
                     }
-                    else if combinedUnit.combineName == self.combinedName || self.combinedName == "" {
-                        combinedUnit.totalAvgDmg = (Double(self.avgDmg) + Double(self.combinedUnits[self.unitSelect].totalAvgDmg))
+                    else if unit.name == self.combinedName || self.combinedName == "" {
+                        unit.totalAvgDmg = (Double(self.avgDmg) + Double(self.units[self.unitSelect].totalAvgDmg))
                     }
                     try? self.moc.save()
                     self.presentationMode.wrappedValue.dismiss()

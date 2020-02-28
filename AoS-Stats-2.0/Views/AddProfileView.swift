@@ -43,7 +43,7 @@ struct AddProfileView: View {
                 
             Button("Save Profile")
                         {
-                let unit = Unit(context: self.moc)
+                let unit = Weapon(context: self.moc)
                 unit.id = UUID()
                 unit.name = self.name
                 unit.toSave = Int16(self.toSave)

@@ -17,19 +17,19 @@ struct SavedProfilesView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.editMode) var editMode
     
+    @FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
-    @FetchRequest(entity: CombinedUnit.entity(), sortDescriptors: []) var combinedUnits: FetchedResults<CombinedUnit>
-    func deleteProfile(at offsets: IndexSet) {
+    func deleteWeapon(at offsets: IndexSet) {
         for offset in offsets {
-            let unit = units[offset]
-            moc.delete(unit)
+            let weapon = weapons[offset]
+            moc.delete(weapon)
         }
         
         try? moc.save()
     }
-    func deleteCombined(at offsets: IndexSet) {
+    func deleteUnit(at offsets: IndexSet) {
         for offset in offsets {
-            let unit = combinedUnits[offset]
+            let unit = units[offset]
             moc.delete(unit)
         }
         try? moc.save()
@@ -39,55 +39,45 @@ struct SavedProfilesView: View {
         VStack{
             List {
                 Section{
-                    ForEach(self.combinedUnits, id: \.combineId) { combinedUnit in
+                    ForEach(self.units, id: \.id) { unit in
                         VStack{
-                            Text("\(combinedUnit.combineName ?? "noName Unit")")
+                            Text("\(unit.name ?? "noName Unit")")
                                 .font(.headline)
-                            Text("Avg Dmg: \(combinedUnit.totalAvgDmg, specifier: "%.2f")")
+                            Text("Avg Dmg: \(unit.totalAvgDmg, specifier: "%.2f")")
                                 .font(.subheadline)
-                            ForEach({ ()-> [Unit] in
-                                var subUnits: [Unit] = []
-                                for unit in self.units {
-                                    if unit.id == combinedUnit.combineId {
-                                    subUnits.append(unit)
-                                    }
-                                }
-                                return subUnits
-                            }(), id: \.self) { _ in
-								Text("profiles: \(combinedUnit.combineName ?? "")")
-                            }
+                          
                             }
                         
                     }
-                    .onDelete(perform: deleteCombined)
+                    .onDelete(perform: deleteUnit)
                 }
                
                 
                 Section{
-                    ForEach(self.units, id: \.id) { unit in
+                    ForEach(self.weapons, id: \.id) { weapon in
                     VStack{
-                        Text("\(unit.name ?? "noName profile")")
+                        Text("\(weapon.name ?? "noName Weapon")")
                             .font(.headline)
                       
                         HStack{
-                            Text("Attacks: \(unit.attacks)")
-                            Text("To Hit: \(unit.toHit)")
+                            Text("Attacks: \(weapon.attacks)")
+                            Text("To Hit: \(weapon.toHit)")
                         }
                         HStack{
-                            Text("To Wound: \(unit.toWound)")
-                            Text("To Rend: \(unit.toRend)")
+                            Text("To Wound: \(weapon.toWound)")
+                            Text("To Rend: \(weapon.toRend)")
                         }
                         HStack{
-                            Text("To Save: \(unit.toSave)")
-                            Text("Damage: \(unit.damage)")
+                            Text("To Save: \(weapon.toSave)")
+                            Text("Damage: \(weapon.damage)")
                         }
-                            Text("Avg Dmg: \(unit.avgDmg, specifier: "%.2f")")
+                            Text("Avg Dmg: \(weapon.avgDmg, specifier: "%.2f")")
                     .font(.headline)
                     .underline()
                         }
                    
                     }
-            .onDelete(perform: deleteProfile)
+            .onDelete(perform: deleteWeapon)
                
                 }
            

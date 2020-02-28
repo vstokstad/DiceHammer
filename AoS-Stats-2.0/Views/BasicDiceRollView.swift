@@ -52,8 +52,8 @@ struct BasicDiceRollView: View {
     @State private var numberOfDice: Double = 10.0
     @State private var diceToSave = 4
     @State var hitRolls: [Dice] = [Dice(diceToSave: 0)]
-    @State private var hits: Int = 0
-//    @State private var diceSlider: Double = 10.0
+	@State private var hits: Int = 0
+
     private var diceRange = 1.0...100.0
     
     func hitCalc(dice: Dice) {
@@ -65,16 +65,20 @@ struct BasicDiceRollView: View {
 
     func Roll(numberOfDice: Int, diceToSave: Int) {
 //Resets values
-        hits = 0
+        hits = numberOfDice+1
         self.hitRolls.removeAll(keepingCapacity: false)
 //        For each dice add a diceObjet
-        for _ in 0...numberOfDice {
+        for i in 0...numberOfDice {
             if hitRolls.isEmpty {
                 hitRolls.insert(Dice(diceToSave: diceToSave), at: 0)
             }
             else {
                 hitRolls.append(Dice(diceToSave: diceToSave))
             }
+			if hitRolls[i].value < self.diceToSave {
+				hits -= 1
+			}
+			
         }
 
         
@@ -94,7 +98,7 @@ struct BasicDiceRollView: View {
             Form{
                 Section{
                     HStack{
-                        Stepper("Dice", value: $numberOfDice.animation(), in: diceRange)
+                        Stepper("Dice", value: $numberOfDice, in: diceRange)
                             .labelsHidden()
                         
                         Spacer()
@@ -105,34 +109,35 @@ struct BasicDiceRollView: View {
                 }
              
                 Section{
-                    
+					HStack{
                         ForEach(self.hitRolls, id: \.id) { dice in
                             VStack{
-                               
-                                        dice.image
-                                            .foregroundColor({ () -> Color in
-                                                if dice.value < self.diceToSave {
-                                                    return self.red
-                                                }
-                                                else {
-                                                    return self.green
-                                                }
-                                            }())  .padding()
-                              
-                                
-                                
-                            
+								dice.image
+									.foregroundColor({ () -> Color in
+										if dice.value < self.diceToSave {
+											return self.red
+										}
+										else {
+											return self.green
+										}
+												}())
+											.shadow(color: .gray, radius: 1, x: 1, y: 1)
+											.shadow(color: .white, radius: 2, x: -1, y: -1)
+								
+							
                             }
-                            .imageScale(.large)
-                        
-                        
-                            
-                        
-                        }
+                            .imageScale(.medium)
+						
+							
+					
+						}
+					
+					}
                      
                                        
-                    
-                              Text("Kept dice: \(self.hits)")
+					
+					Text("Kept dice: \(self.hits)")
+						
                             
                         
                 }
@@ -149,7 +154,7 @@ struct BasicDiceRollView: View {
                             
                           
                         Spacer()
-                        Text("Dice roll to keep \(diceToSave)+")
+						Text("Dice roll to keep \(diceToSave)+")
                     }
                     HStack{
                 Spacer()
@@ -160,25 +165,15 @@ struct BasicDiceRollView: View {
                             
                         }
                         .font(.title)
-                       
                         Spacer()
-                     
-                       
                     }
                 }
-             
-                    
-                   
-                
-
-               
-                    
                 }
             .navigationBarTitle("Basic Dice Roll")
              
             }
    
-        }
+		}
     }
 
    
