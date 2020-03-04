@@ -11,15 +11,17 @@ import SwiftUI
 import GameKit
 import CoreData
 import Combine
+import CoreHaptics
 class Dice: Identifiable, ObservableObject, Comparable {
    
-    
+    @Published var hits = 0
     @Published var id = UUID()
-    @Published var value = 1
+    @Published var value = 0
     @Published var color = Color.gray
-    @Published var image = Image(systemName: "0.square")
-    @Published var diceToSave = Int()
+//    @Published var image = Image(systemName: "0.square")
+	@Published var diceToSave: Int
     private var d6 = {() -> Int in Int.random(in: 1...6)}
+//	Sorting
     static func < (lhs: Dice, rhs: Dice) -> Bool {
         if lhs.value != rhs.value {
             return lhs.value < rhs.value
@@ -32,12 +34,19 @@ class Dice: Identifiable, ObservableObject, Comparable {
     static func == (lhs: Dice, rhs: Dice) -> Bool {
         return lhs.value == rhs.value
     }
+	
     
     init(diceToSave: Int) {
         self.diceToSave = diceToSave
         self.value = d6()
-        self.image = Image(systemName: "\(value).square")
-        
+//        self.image = Image(systemName: "\(value).square")
+	
+		func hitCalc2() -> Int {
+			if self.value > self.diceToSave {
+				self.hits += 1
+			}
+			return hits
+		}
         return
     }
      
@@ -49,134 +58,179 @@ struct BasicDiceRollView: View {
     @Environment(\.managedObjectContext) var moc
     private var red = Color.red
     private var green = Color.green
-    @State private var numberOfDice: Double = 10.0
+	@State private var numberOfDice = 5.0
     @State private var diceToSave = 4
-    @State var hitRolls: [Dice] = [Dice(diceToSave: 0)]
-	@State private var hits: Int = 0
-
-    private var diceRange = 1.0...100.0
+	@State private var hitRolls: [Dice] = [Dice]()
+	@State private var hits = 0
+	private var diceRange = 0.0...100.0
     
-    func hitCalc(dice: Dice) {
-        if dice.value >= diceToSave {
-            hits += 1
-        }
-        
+	
+	func hitCalc() {
+		var hits = 0
+		for dice in hitRolls {
+			if dice.value >= self.diceToSave {
+			hits += 1
+		}
+		self.hits = hits
+		}
+	
+		
     }
 
-    func Roll(numberOfDice: Int, diceToSave: Int) {
-//Resets values
-        hits = numberOfDice+1
+	func Roll(numberOfDice: Int, diceToSave: Int) {
+// empty Roll-Array
+
         self.hitRolls.removeAll(keepingCapacity: false)
 //        For each dice add a diceObjet
-        for i in 0...numberOfDice {
-            if hitRolls.isEmpty {
-                hitRolls.insert(Dice(diceToSave: diceToSave), at: 0)
-            }
-            else {
-                hitRolls.append(Dice(diceToSave: diceToSave))
-            }
-			if hitRolls[i].value < self.diceToSave {
-				hits -= 1
-			}
+        for i in 0..<numberOfDice {
+			hitRolls.insert(Dice(diceToSave: diceToSave), at: i)
 			
         }
-
-        
+		
        hitRolls.sort()
-
-
+		self.hitCalc()
     }
-
-//    func DiceSlideConvert(slideValue: CGFloat) -> Int{
-//       return slideValue.exponent
-//    }
-  
+	
    
     
     var body: some View {
-        NavigationView{
-            Form{
-                Section{
-                    HStack{
-                        Stepper("Dice", value: $numberOfDice, in: diceRange)
-                            .labelsHidden()
-                        
-                        Spacer()
-                        Text("Number of dice: \(numberOfDice, specifier: "%.0f")")
-                    }
-                    
-                    Slider(value: $numberOfDice, in: diceRange, step: 1.0)
-                }
-             
-                Section{
-					HStack{
-                        ForEach(self.hitRolls, id: \.id) { dice in
-                            VStack{
-								dice.image
-									.foregroundColor({ () -> Color in
-										if dice.value < self.diceToSave {
-											return self.red
-										}
-										else {
-											return self.green
-										}
-												}())
-											.shadow(color: .gray, radius: 1, x: 1, y: 1)
-											.shadow(color: .white, radius: 2, x: -1, y: -1)
+		ZStack{
+			LinearGradient(Color.lightStart, Color.lightEnd)
+			
+				
+		
+			ScrollView(showsIndicators: true){
+				Group{
+					Text("Basic Dice Roller")
+						.font(.title)
+						.padding()
+						
+					Spacer()
+					// Number of Dice
+			
 								
-							
-                            }
-                            .imageScale(.medium)
+							VStack{
+								HStack{
+									
+								
+									Text("Dice: \(self.numberOfDice, specifier: "%.0f")")
+									
+									Spacer()
+									Button("-"){
+										if self.numberOfDice != 0 {
+												self.numberOfDice -= 1.0
+										}
+									}
+									.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+									.labelsHidden()
+									
+									Button("+"){
+										if self.numberOfDice != 100 {
+											self.numberOfDice += 1.0
+										}
+									}
+									.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+									.labelsHidden()
+								
+								}
+								ZStack{
+									LinearGradient(Color.lightStart, Color.lightEnd)
+										.cornerRadius(10)
+										.background(LightBackground(isHighlighted: false, shape: RoundedRectangle(cornerRadius: 10)))
+									Slider(value: $numberOfDice, in: diceRange, step: 1.0)
+								}
+							}
+							.padding()
 						
-							
+						
 					
+				}
+					
+				Group{
+					VStack{
+				
+						HStack{
+							ForEach(self.hitRolls, id: \.id) { dice in
+//								Dice as text
+							
+								VStack{
+									Text("\(dice.value)")
+										.font(.title)
+										.animation(.spring())
+										.foregroundColor({()->Color in if dice.value < self.diceToSave{
+												return self.red
+											}
+											else {
+												return self.green
+											}
+										}())
+								}
+							}
+							
 						}
+						.fixedSize(horizontal: true, vertical: false)
+						Spacer()
 					
-					}
-                     
-                                       
-					
-					Text("Kept dice: \(self.hits)")
+						Text("Kept dice: \({()->String in for dice in self.hitRolls{self.hits += dice.hits};return self.hits.description}())")
+						.font(.headline)
 						
-                            
-                        
-                }
-                
-                  
-                
-                
-                
-                Section{
+						
+					}
+					
+							
+							
+							
+			}
  //                    Picker för att välja vilka slag som ska sparas
-                    HStack{
-                        Stepper("Dice roll to keep", value: $diceToSave.animation(), in: 1...6)
-                            .labelsHidden()
-                            
-                          
-                        Spacer()
-						Text("Dice roll to keep \(diceToSave)+")
-                    }
-                    HStack{
-                Spacer()
-                        Button("Roll Hits") {
-                           
+				Spacer()
+			 Group{
+				
+				HStack{
+					Text("Dice to keep \(diceToSave)+")
+						Spacer()
+					Button("-"){
+						if self.diceToSave != 1 {
+							self.diceToSave -= 1
+						}
+					}
+					.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+					.labelsHidden()
+					
+					Button("+"){
+						if self.diceToSave != 6 {
+							self.diceToSave += 1
+						}
+					}
+					.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+					.labelsHidden()
+					
+						
+					
+							
+				}
+				.padding()
+			}
+				Spacer()
+				VStack{
+					Spacer()
+					Button("Roll") {
                             self.Roll(numberOfDice: Int(self.numberOfDice), diceToSave: self.diceToSave)
-                          
-                            
-                        }
-                        .font(.title)
-                        Spacer()
-                    }
-                }
-                }
-            .navigationBarTitle("Basic Dice Roll")
-             
-            }
-   
+					}
+					.buttonStyle(LightButtonStyle(shape: Circle()))
+					.animation(nil)
+				.padding()
+				}
+		
+			}
+		
+				
 		}
-    }
-
-   
+		.edgesIgnoringSafeArea(.all)
+		
+	}
+	
+}
+	
     
 
 

@@ -29,7 +29,7 @@ struct CombineProfileView: View {
     @State private var combinedName = ""
     @State private var unitName = ""
     @State private var unitSelect = 0
-    var attacks: Int
+    var attacks: Double
     var toHit: Int
     var toWound: Int
     var toRend: Int
@@ -69,7 +69,7 @@ struct CombineProfileView: View {
                 }
             
                 Section{
-                    Text("Attacks: \(attacks)")
+                    Text("Attacks: \(attacks, specifier: "%.2f")")
                     Text("To Hit: \(toHit)")
                     Text("To Wound: \(toWound)")
                     Text("Rend: \(toRend)")

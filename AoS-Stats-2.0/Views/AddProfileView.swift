@@ -16,7 +16,7 @@ struct AddProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
 
-    var attacks: Int
+    var attacks: Double
     var toHit: Int
     var toWound: Int
     var toRend: Int
@@ -33,7 +33,7 @@ struct AddProfileView: View {
         TextField("Profile Name", text: $name)
                     }}
                 Section{
-                        Text("Attacks: \(attacks)")
+					Text("Attacks: \(attacks, specifier: "%.2f")")
                         Text("To Hit: \(toHit)")
                         Text("To Wound: \(toWound)")
                         Text("Rend: \(toRend)")
@@ -67,6 +67,6 @@ struct AddProfileView: View {
 }
 struct AddProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddProfileView(attacks: ContentView().attacks, toHit: ContentView().toHit, toWound: ContentView().toWound, toRend: ContentView().toRend, toSave: ContentView().toSave, damage: ContentView().damage, avgDmg: AvgDmg().calc(attacks: Double(ContentView().attacks), toHit: Double(ContentView().toHit), toWound: Double(ContentView().toWound), toRend: Double(ContentView().toRend), damage: Double(ContentView().damage), toSave: Double(ContentView().toSave)))
+		AddProfileView(attacks: ContentView().attacks, toHit: ContentView().toHit, toWound: ContentView().toWound, toRend: ContentView().toRend, toSave: ContentView().toSave, damage: ContentView().damage, avgDmg: AvgDmg().calc(attacks: Double(ContentView().attacks), toHit: Double(ContentView().toHit), toWound: Double(ContentView().toWound), toRend: Double(ContentView().toRend), damage: Double(ContentView().damage), toSave: Double(ContentView().toSave)))
     }
 }

@@ -21,9 +21,9 @@ struct ContentView: View {
     @State private var comBineProfileViewShowing = false
     @State private var selection: Int = 0
     @ObservedObject var avgDmg = AvgDmg()
-    var d6 = Int.random(in: 1...6)
+//    var d6 = Int.random(in: 1...6)
    
-    @State public var attacks = 1
+	@State public var attacks = 1.0
     @State public var toHit = 2
     @State public var toWound = 2
     @State public var toRend = 1
@@ -34,25 +34,24 @@ struct ContentView: View {
     
     
     var body: some View {
+		ZStack{
+			LinearGradient(Color.lightStart, Color.lightEnd)
+		
+		
             TabView(selection: $selection){
-           
-         VStack{
-            Text("Avg Dmg Calc")
-                .font(.largeTitle)
-                .bold()
+          
+         ScrollView{
             Spacer()
             VStack{
+				Text("Avg Dmg Calc")
+					.font(.largeTitle)
+				HStack{
+					Text("Attacks: \(attacks, specifier: "%.0f")")
+				Stepper("", value: $attacks, in: 1.0...101.0)
+				}
+				Slider(value: $attacks, in: 1.0...101.0, step: 1.0)
 			
-            Text("Attacks")
-                Picker(selection: $attacks, label: Text("Attacks")) {
-                  ForEach(0..<100) {
-                      Text("\($0)")
-                  }
-              }
-            .pickerStyle(WheelPickerStyle())
-            .labelsHidden()
-            .padding(.all, -50.0)
-            
+				
             Text("To Hit")
             Picker(selection: $toHit, label: Text("To Hit")) {
                 ForEach(0..<7) {
@@ -107,10 +106,9 @@ struct ContentView: View {
                     Text("Average Damage Output:")
                         .font(.headline)
                     
-                 Text("\(avgDmg.calc(attacks: Double(attacks), toHit: Double(toHit), toWound: Double(toWound), toRend: Double(toRend), damage: Double(damage), toSave: Double(toSave)), specifier: "%.2f")")
+                 Text("\(avgDmg.calc(attacks: attacks, toHit: Double(toHit), toWound: Double(toWound), toRend: Double(toRend), damage: Double(damage), toSave: Double(toSave)), specifier: "%.2f")")
                 .fontWeight(.bold)
                 .font(.title)
-                   
                     }
               
             Spacer()
@@ -125,7 +123,7 @@ struct ContentView: View {
                 }
                 }
             .sheet(isPresented: self.$addProfileViewShowing) {
-                AddProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: Double(self.attacks), toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
+                AddProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: self.attacks, toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
                 }
        Spacer()
                 Button(action: {
@@ -139,7 +137,7 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                 }
                 .sheet(isPresented: self.$comBineProfileViewShowing) {
-                    CombineProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: Double(self.attacks), toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
+                    CombineProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: self.attacks, toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
                 }
                 .disabled(units.isEmpty)
                 Spacer()
@@ -163,19 +161,17 @@ struct ContentView: View {
                   }
             
          }
-         .tabItem
-            {
+         .tabItem {
              VStack {
                 Image(systemName: "star")
                 Text("AvgDmg")
                     }
                 }
                 .tag(0)
-                
-              
-                BasicDiceRollView().environment(\.managedObjectContext, self.moc)
-
-                
+				
+			VStack{
+               BasicDiceRollView().environment(\.managedObjectContext, self.moc)
+		}
             .tabItem {
                     VStack {
                         Image(systemName: "star")
@@ -183,26 +179,21 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-                
-                VStack{
-                  Text("Third View")
-                }
-                
-                    
+				VStack{
+            Text("third View")
+			}
                     .tabItem {
                         VStack {
                             Image(systemName: "star")
                             Text("Basic DiceRoll")
-                        }
+					}
                 }
                 .tag(2)
-        }
-    
-
-    }
-
-       
-    }
+			}
+			.edgesIgnoringSafeArea(.all)
+		}
+	}
+}
 
 
 

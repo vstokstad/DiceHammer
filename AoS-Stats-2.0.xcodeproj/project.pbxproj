@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C06EA63240A8B83008F515C /* NeoMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06EA62240A8B83008F515C /* NeoMorphView.swift */; };
 		7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */; };
 		7C682D5923D324370028A496 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5823D324370028A496 /* AppDelegate.swift */; };
 		7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5A23D324370028A496 /* SceneDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C06EA62240A8B83008F515C /* NeoMorphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NeoMorphView.swift; path = NeoMorph/NeoMorphView.swift; sourceTree = SOURCE_ROOT; };
 		7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SavedProfilesView.swift; path = "AoS-Stats-2.0/Views/SavedProfilesView.swift"; sourceTree = SOURCE_ROOT; };
 		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D5823D324370028A496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		7C61DD4C23FE6DD500F07CE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C06EA62240A8B83008F515C /* NeoMorphView.swift */,
 				7C682D5F23D324370028A496 /* ContentView.swift */,
 				7CF9AC1823FF36FC001214AD /* AddProfileView.swift */,
 				7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */,
@@ -390,6 +393,7 @@
 				7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */,
 				7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */,
 				7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */,
+				7C06EA63240A8B83008F515C /* NeoMorphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
