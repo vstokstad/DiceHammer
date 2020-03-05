@@ -17,8 +17,9 @@ class AvgDmg: ObservableObject, Identifiable {
     public var d6 = 3.0
     public var d3 = 1.5
     var oneOutOfD6 = 0.1667
-    func calc(attacks: Double, toHit: Double, toWound: Double, toRend: Double, damage: Double, toSave: Double) -> Double {
+	func calc(attacks: Double, toHit: Double, toWound: Double, toRend: Double, damage: Double, toSave: Double) -> Double {
   
+		
         var wounds: Double
         let hitP: Double = ((7-toHit)*oneOutOfD6)
         let woundP: Double = hitP*((7-toWound)*oneOutOfD6)
@@ -26,6 +27,9 @@ class AvgDmg: ObservableObject, Identifiable {
         if toSave <= 1 {
             wounds = woundP * attacks
         }
+		else if toSave > 6 {
+			 wounds = woundP * attacks
+		}
         else {
             wounds = saveP*attacks
         }

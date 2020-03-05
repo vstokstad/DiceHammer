@@ -181,7 +181,7 @@ struct BasicDiceRollView: View {
 							
 							
 			}
- //                    Picker för att välja vilka slag som ska sparas
+				//        	Picker för att välja vilka slag som ska sparas
 				Spacer()
 			 Group{
 				

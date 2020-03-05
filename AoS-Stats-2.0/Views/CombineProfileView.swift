@@ -15,7 +15,6 @@ import Foundation
 struct CombineProfileView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.editMode) var editMode
     @FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
     func deleteUnit(at offsets: IndexSet) {
@@ -69,7 +68,7 @@ struct CombineProfileView: View {
                 }
             
                 Section{
-                    Text("Attacks: \(attacks, specifier: "%.2f")")
+                    Text("Attacks: \(attacks, specifier: "%.0f")")
                     Text("To Hit: \(toHit)")
                     Text("To Wound: \(toWound)")
                     Text("Rend: \(toRend)")

@@ -15,7 +15,6 @@ import UIKit
 struct SavedProfilesView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.editMode) var editMode
     
     @FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
@@ -45,6 +44,7 @@ struct SavedProfilesView: View {
                                 .font(.headline)
                             Text("Avg Dmg: \(unit.totalAvgDmg, specifier: "%.2f")")
                                 .font(.subheadline)
+							Text("Weapons: \(unit.toWeapon!)")
                           
                             }
                         

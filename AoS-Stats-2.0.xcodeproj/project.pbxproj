@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7C06EA63240A8B83008F515C /* NeoMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C06EA62240A8B83008F515C /* NeoMorphView.swift */; };
+		7C3CD43F24111FCE007239CE /* AvgDmgCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3CD43E24111FCE007239CE /* AvgDmgCalcView.swift */; };
+		7C3CD4412411404C007239CE /* AddUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3CD4402411404C007239CE /* AddUnitView.swift */; };
 		7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */; };
 		7C682D5923D324370028A496 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5823D324370028A496 /* AppDelegate.swift */; };
 		7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D5A23D324370028A496 /* SceneDelegate.swift */; };
@@ -28,7 +30,7 @@
 		7CB12D632409073500B7A858 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB12D612409073500B7A858 /* LaunchScreen.storyboard */; };
 		7CBF7D792406677B003E2A05 /* DiceRolls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D782406677B003E2A05 /* DiceRolls.swift */; };
 		7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */; };
-		7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9AC1823FF36FC001214AD /* AddProfileView.swift */; };
+		7CF9AC1923FF36FC001214AD /* AddWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9AC1823FF36FC001214AD /* AddWeaponView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,11 +52,13 @@
 
 /* Begin PBXFileReference section */
 		7C06EA62240A8B83008F515C /* NeoMorphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NeoMorphView.swift; path = NeoMorph/NeoMorphView.swift; sourceTree = SOURCE_ROOT; };
+		7C3CD43E24111FCE007239CE /* AvgDmgCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmgCalcView.swift; sourceTree = "<group>"; };
+		7C3CD4402411404C007239CE /* AddUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUnitView.swift; sourceTree = "<group>"; };
 		7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SavedProfilesView.swift; path = "AoS-Stats-2.0/Views/SavedProfilesView.swift"; sourceTree = SOURCE_ROOT; };
 		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D5823D324370028A496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C682D5A23D324370028A496 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7C682D5D23D324370028A496 /* AoS_Stats_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AoS_Stats_2_0.xcdatamodel; sourceTree = "<group>"; };
+		7C682D5D23D324370028A496 /* AoS_Stats_2_0.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = AoS_Stats_2_0.xcdatamodel; sourceTree = "<group>"; };
 		7C682D5F23D324370028A496 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7C682D6123D324380028A496 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C682D6423D324380028A496 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -78,7 +82,7 @@
 		7CB12D642409073500B7A858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CBF7D782406677B003E2A05 /* DiceRolls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRolls.swift; sourceTree = "<group>"; };
 		7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineProfileView.swift; sourceTree = "<group>"; };
-		7CF9AC1823FF36FC001214AD /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
+		7CF9AC1823FF36FC001214AD /* AddWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeaponView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +122,11 @@
 			children = (
 				7C06EA62240A8B83008F515C /* NeoMorphView.swift */,
 				7C682D5F23D324370028A496 /* ContentView.swift */,
-				7CF9AC1823FF36FC001214AD /* AddProfileView.swift */,
+				7C3CD43E24111FCE007239CE /* AvgDmgCalcView.swift */,
+				7CF9AC1823FF36FC001214AD /* AddWeaponView.swift */,
 				7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */,
 				7CBF7D7A2406C84A003E2A05 /* CombineProfileView.swift */,
+				7C3CD4402411404C007239CE /* AddUnitView.swift */,
 				7C92E5AD240053290017C838 /* BasicDiceRollView.swift */,
 			);
 			path = Views;
@@ -383,7 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CF9AC1923FF36FC001214AD /* AddProfileView.swift in Sources */,
+				7CF9AC1923FF36FC001214AD /* AddWeaponView.swift in Sources */,
 				7CBF7D792406677B003E2A05 /* DiceRolls.swift in Sources */,
 				7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */,
 				7C682D5E23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld in Sources */,
@@ -394,6 +400,8 @@
 				7C61DD5223FEFEB000F07CE9 /* SavedProfilesView.swift in Sources */,
 				7C682D5B23D324370028A496 /* SceneDelegate.swift in Sources */,
 				7C06EA63240A8B83008F515C /* NeoMorphView.swift in Sources */,
+				7C3CD4412411404C007239CE /* AddUnitView.swift in Sources */,
+				7C3CD43F24111FCE007239CE /* AvgDmgCalcView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

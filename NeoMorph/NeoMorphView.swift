@@ -64,7 +64,7 @@ struct LightBackground<S: Shape>: View {
 					.overlay(shape.stroke(LinearGradient(Color.lightStart, Color.lightEnd), lineWidth: 1))
 					.overlay(shape.stroke(Color.lightStart, lineWidth: 0.3))
 					.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
-					.shadow(color: Color.white, radius: 5, x: -5, y: -5)
+					.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 				
 			}
 		}
