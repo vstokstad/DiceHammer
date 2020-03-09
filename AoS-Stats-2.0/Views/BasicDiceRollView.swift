@@ -200,10 +200,13 @@ struct BasicDiceRollView: View {
 				
 //				Header & Dice
 				Group{
+					HStack{
 					Text("Basic Dice Roller")
-						.font(.headline)
+						.font(.title)
 						.padding()
-					
+						Spacer()
+					}
+		
 					
 					// Number of Dice
 					VStack{
