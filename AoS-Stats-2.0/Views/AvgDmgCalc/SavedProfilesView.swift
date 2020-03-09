@@ -8,9 +8,7 @@
 
 import SwiftUI
 import CoreData
-import Foundation
-import GameKit
-import UIKit
+
 
 struct SavedProfilesView: View {
     @Environment(\.managedObjectContext) var moc
@@ -18,6 +16,8 @@ struct SavedProfilesView: View {
     
     @FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
     @FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
+	
+	@State private var selected = false
     func deleteWeapon(at offsets: IndexSet) {
         for offset in offsets {
             let weapon = weapons[offset]
@@ -33,20 +33,27 @@ struct SavedProfilesView: View {
         }
         try? moc.save()
     }
+	
     var body: some View {
         NavigationView{
         VStack{
-            List {
+            List{
                 Section{
                     ForEach(self.units, id: \.id) { unit in
                         VStack{
-                            Text("\(unit.name ?? "noName Unit")")
+                            Text("\(unit.name ?? String("noName Unit"))")
                                 .font(.headline)
                             Text("Avg Dmg: \(unit.totalAvgDmg, specifier: "%.2f")")
                                 .font(.subheadline)
-							Text("Weapons: \(unit.toWeapon!)")
-                          
+							HStack{
+								Text("Weapons: ")
+								ForEach(self.weapons, id: \.id){ weapon in
+							VStack{
+								Text("\(weapon.name ?? String("noName Weapon"))")
+							}
                             }
+							}
+						}
                         
                     }
                     .onDelete(perform: deleteUnit)
@@ -56,9 +63,16 @@ struct SavedProfilesView: View {
                 Section{
                     ForEach(self.weapons, id: \.id) { weapon in
                     VStack{
+						HStack{
                         Text("\(weapon.name ?? "noName Weapon")")
                             .font(.headline)
-                      
+							if self.selected == true {
+							Image(systemName: "star.fill")
+						}
+						else {
+							Image(systemName: "star")
+						}
+						}
                         HStack{
                             Text("Attacks: \(weapon.attacks)")
                             Text("To Hit: \(weapon.toHit)")
@@ -73,11 +87,13 @@ struct SavedProfilesView: View {
                         }
                             Text("Avg Dmg: \(weapon.avgDmg, specifier: "%.2f")")
                     .font(.headline)
-                    .underline()
                         }
                    
                     }
             .onDelete(perform: deleteWeapon)
+					.onTapGesture {
+						self.selected.toggle()
+					}
                
                 }
            
@@ -86,7 +102,7 @@ struct SavedProfilesView: View {
             }
         
         .navigationBarTitle("Saved Profiles")
-        .navigationBarItems(leading: EditButton(), trailing:  Button("Back") {
+        .navigationBarItems(leading: EditButton(), trailing: Button("Back") {
             self.presentationMode.wrappedValue.dismiss()
             })
         }

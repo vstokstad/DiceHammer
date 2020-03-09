@@ -30,6 +30,9 @@ class AvgDmg: ObservableObject, Identifiable {
 		else if toSave > 6 {
 			 wounds = woundP * attacks
 		}
+		else if toSave + toRend > 6 {
+			wounds = woundP * attacks
+		}
         else {
             wounds = saveP*attacks
         }

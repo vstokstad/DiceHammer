@@ -12,7 +12,8 @@ struct AvgDmgCalcView: View {
 	@Environment(\.managedObjectContext) var moc
 	@Environment(\.editMode) var editMode
 	
-	@FetchRequest(entity: Weapon.entity(), sortDescriptors: [NSSortDescriptor.init(key: "name", ascending: true)]) var weapons: FetchedResults<Weapon>
+	@FetchRequest(entity: Weapon.entity(), sortDescriptors: []) var weapons: FetchedResults<Weapon>
+	@FetchRequest(entity: Unit.entity(), sortDescriptors: []) var units: FetchedResults<Unit>
 	
 	@State private var addWeaponViewShowing = false
 	@State private var savedProfilesViewShowing = false
@@ -32,45 +33,22 @@ struct AvgDmgCalcView: View {
 	@State private var d6Toggle = false
 	var body: some View {
 		ZStack{
-			LinearGradient(Color.lightStart, Color.lightEnd)
+			LinearGradient(Color.lightStart, Color.lightEnd).zIndex(0)
+				.edgesIgnoringSafeArea(.all)
 			
 			ScrollView{
+				
 				VStack{
 					HStack{
-						Button(action:  {
-							self.addUnitViewShowing.toggle()
-						}) {
-							VStack {
-								Image(systemName: "star.fill")
-								Text("New Unit")
-									.font(.caption)
-							}
-						}
-						.sheet(isPresented: self.$addUnitViewShowing) {
-							AddUnitView()
-						}
-
-						Spacer()
+					
 						Text("Avg Dmg Calc")
 							.font(.headline)
-							.padding()
-						Spacer()
-						Button(action:  {
-							self.addWeaponViewShowing.toggle()
-						}) {
-							VStack {
-								Image(systemName: "square.and.arrow.down.fill")
-								Text("Save Weapon")
-									.font(.caption)
-							}
-						}
-						.sheet(isPresented: self.$addWeaponViewShowing) {
-							AddWeaponView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage).environment(\.managedObjectContext, self.moc)
-						}
+						.padding()
 					}
 					Group{
 						HStack{
 							Text("Attacks: \(attacks, specifier: "%.0f")")
+								.font(.caption)
 							Spacer()
 							Button("-"){
 								if self.attacks != 0.0 {
@@ -78,7 +56,7 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 							
 							Button("+"){
 								if self.attacks != 100.0 {
@@ -86,20 +64,22 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 						}
+					
 						Slider(value: $attacks, in: 1.0...101.0, step: 1.0)
-						
+							
 						HStack{
 							Text("To Hit: \(self.toHit)+")
+								.font(.caption)
 							Spacer()
 							Button("-"){
 								if self.toHit != 0 {
 									self.toHit -= 1
 								}
 							}
-							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 1)))
+							
 							
 							Button("+"){
 								if self.toHit != 6 {
@@ -107,10 +87,12 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 						}
+						
 						HStack{
 							Text("To Wound: \(toWound)+")
+								.font(.caption)
 							Spacer()
 							Button("-"){
 								if self.toWound != 0 {
@@ -118,7 +100,7 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+						
 							
 							Button("+"){
 								if self.toWound != 6 {
@@ -126,10 +108,12 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+						
 						}
+						
 						HStack{
 							Text("Rend: -\(toRend)")
+								.font(.caption)
 							Spacer()
 							Button("-"){
 								if self.toRend != 0 {
@@ -137,7 +121,7 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 							
 							Button("+"){
 								if self.toRend != 6 {
@@ -145,10 +129,12 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 						}
+					
 						HStack{
 							Text("To Save: \(toSave)+")
+								.font(.caption)
 							Spacer()
 							Button("-"){
 								if self.toSave != 0 {
@@ -156,7 +142,7 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 							
 							Button("+"){
 								if self.toSave != 7 {
@@ -164,14 +150,14 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 						}
+						
 						HStack{
 							
 							Text("Damage: \(damage)")
-							Spacer()
-							Toggle("d3", isOn: $d3Toggle)
-								.font(.footnote)
+								.font(.caption)
+							
 								
 							Spacer()
 							Button("-"){
@@ -180,7 +166,7 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 							
 							Button("+"){
 								if self.damage != 10 {
@@ -188,16 +174,11 @@ struct AvgDmgCalcView: View {
 								}
 							}
 							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.labelsHidden()
+							
 							
 						}
-						HStack{
+						.padding(.horizontal)
 						
-							Text("Reroll ones")
-							Text("Reroll ones")
-							Text("sixes explode")
-						}
-						.font(.caption)
 						HStack{
 							Text("Average Damage Output:")
 								.font(.subheadline)
@@ -208,15 +189,41 @@ struct AvgDmgCalcView: View {
 						}
 						.padding()
 					}
+				
 					Group{
 						HStack{
+							Button(action:  {
+							self.addWeaponViewShowing.toggle()
+						}) {
+							VStack {
+								Image(systemName: "square.and.arrow.down.fill")
+								Text("Save Weapon")
+									.font(.caption)
+							}
+						}
+						.sheet(isPresented: self.$addWeaponViewShowing) {
+							AddWeaponView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage).environment(\.managedObjectContext, self.moc)
+								.disabled(self.units.isEmpty)
+							}
+							Button(action:  {
+								self.addUnitViewShowing.toggle()
+							}) {
+								VStack {
+									Image(systemName: "star.fill")
+									Text("New Unit")
+										.font(.caption)
+								}
+							}
+							.sheet(isPresented: self.$addUnitViewShowing) {
+								AddUnitView().environment(\.managedObjectContext, self.moc)
+							}
 							Spacer()
 							Button(action: {
 								self.comBineProfileViewShowing.toggle()
 							}) {
 								VStack{
 									Image(systemName: "square.and.arrow.down.on.square.fill")
-									Text("Add to Unit")
+									Text("Combine Weapon and Unit")
 										.font(.caption
 									)
 									
@@ -224,8 +231,9 @@ struct AvgDmgCalcView: View {
 								.multilineTextAlignment(.center)
 							}
 							.sheet(isPresented: self.$comBineProfileViewShowing) {
-								CombineProfileView(attacks: self.attacks, toHit: self.toHit, toWound: self.toWound, toRend: self.toRend, toSave: self.toSave, damage: self.damage, avgDmg: self.avgDmg.calc(attacks: self.attacks, toHit: Double(self.toHit), toWound: Double(self.toWound), toRend: Double(self.toRend), damage: Double(self.damage), toSave: Double(self.toSave))).environment(\.managedObjectContext, self.moc)
+								CombineProfileView().environment(\.managedObjectContext, self.moc)
 							}
+							.disabled(self.units.isEmpty || self.weapons.isEmpty)
 							Spacer()
 							Button(action:  {
 								self.savedProfilesViewShowing.toggle()
@@ -245,9 +253,11 @@ struct AvgDmgCalcView: View {
 						.font(.subheadline)
 						Spacer()
 					}
-				}}
-				.padding()
-		}.edgesIgnoringSafeArea(.all)
+				}
+			.padding()
+				
+			}
+		}
 	}
 }
 
