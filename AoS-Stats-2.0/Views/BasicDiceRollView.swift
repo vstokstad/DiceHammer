@@ -257,6 +257,7 @@ struct BasicDiceRollView: View {
 								}
 								
 							}
+							Spacer()
 							if ones.count > 0 {
 							Text("Ones: \(ones.count)")
 								.font(.caption)
@@ -270,8 +271,9 @@ struct BasicDiceRollView: View {
 										.frame(width: 30, height: 30, alignment: .top)
 										.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
 										.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									
-								}}
+								}
+							}
+							Spacer()
 							if twos.count > 0 {
 							Text("twos: \(twos.count)")
 							.font(.caption)
@@ -287,6 +289,7 @@ struct BasicDiceRollView: View {
 										.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
 								}
 							}
+							Spacer()
 							if threes.count > 0 {
 							Text("threes: \(threes.count)")
 								.font(.caption)
@@ -302,9 +305,11 @@ struct BasicDiceRollView: View {
 										.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
 								}
 							}
+							Spacer()
 							if fours.count > 0 {
 							Text("fours: \(fours.count)")
 								.font(.caption)
+								
 							}
 						}
 						VStack{
@@ -317,6 +322,7 @@ struct BasicDiceRollView: View {
 										.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
 								}
 							}
+							Spacer()
 							if fives.count > 0 {
 							Text("fives: \(fives.count)")
 								.font(.caption)
@@ -332,6 +338,7 @@ struct BasicDiceRollView: View {
 										.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
 								}
 							}
+							Spacer()
 							if sixes.count > 0 {
 							Text("sixes: \(sixes.count)")
 								.font(.caption)
