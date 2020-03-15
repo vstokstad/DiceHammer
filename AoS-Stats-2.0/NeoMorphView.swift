@@ -64,6 +64,7 @@ struct LightBackground<S: Shape>: View {
 		}
 	}
 }
+
 struct NeoMorphView: View {
     var body: some View {
 		ZStack{

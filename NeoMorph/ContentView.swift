@@ -77,10 +77,10 @@ struct ContentView: View {
 			VStack{
 				Spacer()
 				Button("Rectangle"){
-					self.isPressed.toggle()
-					
+						self.isPressed.toggle()
 				}
 				.buttonStyle(LightButtonStyle(shape: Rectangle()))
+				
 				Spacer()
 				Button("Circle"){
 					self.isPressed.toggle()
@@ -92,7 +92,6 @@ struct ContentView: View {
 					self.isPressed.toggle()
 				}
 				.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 5)))
-				RotatedShape()
 			Spacer()
 			
 			}
