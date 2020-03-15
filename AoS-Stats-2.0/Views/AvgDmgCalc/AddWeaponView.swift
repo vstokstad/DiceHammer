@@ -186,11 +186,4 @@ struct AddWeaponView: View {
 		}
 	}
 }
-struct AddProfileView_Previews: PreviewProvider {
-   	
-	static var previews: some View {
-	
 
-		AddWeaponView(attacks: ContentView().attacks, toHit: ContentView().toHit, toWound: ContentView().toWound, toRend: ContentView().toRend, toSave: ContentView().toSave, damage: ContentView().damage)
-    }
-}
