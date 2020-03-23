@@ -10,9 +10,9 @@ import Foundation
 import SwiftUI
 import Combine
 class DynamicDice: ObservableObject {
-	@State private var diceSelected = true
+	@State private var diceSelected: Bool
 var value = 0
-	@Published var diceSize: CGFloat = 15.0
+	var diceSize: CGFloat = Dice.diceSize
 	func dynamicDice(value: Int) -> some View {
 		var dice: some View {
 			
@@ -234,7 +234,8 @@ var value = 0
 		}
 	return dice
 	}
-	init(value: Int) {
+	init(value: Int, diceSelected: Bool) {
 		self.value = value
+		self.diceSelected = diceSelected
 	}
 }
