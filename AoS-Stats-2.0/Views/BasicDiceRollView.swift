@@ -21,7 +21,7 @@ struct diceShake: GeometryEffect {
 	}
 	func effectValue(size: CGSize) -> ProjectionTransform {
 		
-		return ProjectionTransform(CGAffineTransform(translationX: CGFloat(Double.random(in: -10...10)) * sin(position * 2 * .pi), y: CGFloat(Double.random(in: -10...10)) * sin(position * 2 * .pi)))
+		return ProjectionTransform(CGAffineTransform(translationX: CGFloat(Double.random(in: -20...20)) * sin(position * 2 * .pi), y: CGFloat(Double.random(in: -20...20)) * sin(position * 2 * .pi)))
 		
 	}
 }
@@ -55,12 +55,13 @@ struct BasicDiceRollView: View {
 	@State private var sixes: [Dice] = [Dice]()
 	
 	//	Haptic feedback
-	@State private var diceSelected = false
+	@State var diceSelected = false
 	public func DiceHaptic() {
 		let feedbackGenerator = UIImpactFeedbackGenerator()
+		if diceSelected == true {
 		feedbackGenerator.prepare()
 		feedbackGenerator.impactOccurred()
-		
+		}
 	}
 	
 	//	Hits counter
@@ -82,7 +83,7 @@ struct BasicDiceRollView: View {
 			//			rr ones
 			if rerolls[0] == true && dice.value == 1{
 				dice.value = d6()
-				self.DiceHaptic()
+			
 					DiceValues()
 				self.rerollCount += 1
 			}
@@ -90,7 +91,7 @@ struct BasicDiceRollView: View {
 			else if rerolls[1] == true {
 				dice.value = d6()
 					DiceValues()
-				self.DiceHaptic()
+			
 				self.rerollCount += 1
 			}
 				//				rr failed
@@ -98,14 +99,14 @@ struct BasicDiceRollView: View {
 				if dice.value < self.diceToSave {
 					dice.value = d6()
 						DiceValues()
-					self.DiceHaptic()
+					
 					self.rerollCount += 1
 				}
 			}
 			else if rerolls[3] && dice.value == 6 {
 				dice.value = d6()
 					DiceValues()
-				self.DiceHaptic()
+			
 				self.rerollCount += 1
 			}
 		}
@@ -159,7 +160,7 @@ struct BasicDiceRollView: View {
 				}
 				
 				
-				ScrollView(showsIndicators: false){
+				ScrollView(showsIndicators: true){
 					
 					
 					//				Header & Dice
@@ -179,6 +180,7 @@ struct BasicDiceRollView: View {
 									}
 								}
 								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+								.animation(nil)
 								
 								Button("+"){
 									if self.numberOfDice != 100 {
@@ -186,6 +188,7 @@ struct BasicDiceRollView: View {
 									}
 								}
 								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+							.animation(nil)
 								
 							}
 							
@@ -199,20 +202,84 @@ struct BasicDiceRollView: View {
 						
 					}
 					//					DynamiDiceView
-					ForEach(ones, id: \.id){ dice in
-						DynamicDice(value: dice.value).dynamicDice(value: dice.value)
+					HStack(alignment: .top, spacing: 2, content: {
+						VStack{
+							if ones.count != 0 {
+								Text("\(ones.count)").font(.caption)
+							ForEach(ones, id: \.id){ dice in
+								DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							}
+						}
+						}
+						VStack{
+							if twos.count != 0 {
+								Text("\(twos.count)").font(.caption)
+								ForEach(twos, id: \.id){ dice in
+									DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							}
+							}
+							
+						}
+						VStack{
+							if threes.count != 0 {
+								Text("\(threes.count)").font(.caption)
+							ForEach(threes, id: \.id){ dice in
+								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							}
+							}
+							
+						}
+						VStack{
+							if fours.count != 0 {
+								Text("\(fours.count)").font(.caption)
+							ForEach(fours, id: \.id){ dice in
+								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							}
+						}
+						}
+						VStack{
+							if fives.count != 0 {
+								ZStack{
+									
+									Text("\(fives.count)").font(.caption)
+								}
+						ForEach(fives, id: \.id){ dice in
+							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							
+						}
+						}
+						}
+						VStack{
+							if sixes.count != 0 {
+								Text("\(sixes.count)").font(.caption)
+						ForEach(sixes, id: \.id){ dice in
+							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)
+								.onAppear(){	self.diceSelected.toggle()}
+								
+								.foregroundColor(.black)
+							
+						}
+						}
+						}
+					})
+						.onAppear(){
+							self.DiceHaptic()
+								
+							
 					}
-//					DynamicDiceView(diceSelected: $diceSelected, ones: $ones, twos: $twos, threes: $threes, fours: $fours, fives: $fives, sixes: $sixes)
+						.onTapGesture {
+							self.DiceHaptic()
+							
+							
+						}
+					
 				}
+				
 				VStack{
 					//				diceStats
 					if !hitRolls.isEmpty {
 						Group{
 							HStack{
-								
-								
-								
-								
 								Text("Failed: \(self.hitRolls.count-self.hits)")
 									.font(.caption)
 									.padding()
@@ -320,9 +387,10 @@ struct BasicDiceRollView: View {
 							for _ in 0..<Int(self.numberOfDice) {
 								self.hitRolls.append(Dice())
 								
-								
+									self.diceSelected.toggle()
 							}
 							self.DiceValues()
+						
 							self.hitCalc()
 						
 						}
@@ -336,8 +404,9 @@ struct BasicDiceRollView: View {
 								for _ in 0..<self.hits {
 									self.hitRolls.append(Dice())
 									
-									
+										self.diceSelected.toggle()
 								}
+								
 								self.DiceValues()
 								self.hitCalc()
 							}
