@@ -390,7 +390,7 @@ struct BasicDiceRollView: View {
 									self.diceSelected.toggle()
 							}
 							self.DiceValues()
-						
+							self.rerollCount = 0
 							self.hitCalc()
 						
 						}
