@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftUI
-import CoreData
 import Combine
 import CoreHaptics
 import UIKit
@@ -22,209 +21,49 @@ struct diceShake: GeometryEffect {
 	}
 	func effectValue(size: CGSize) -> ProjectionTransform {
 		
-		return ProjectionTransform(CGAffineTransform(translationX: 50 * sin(position * 2 * .pi), y: CGFloat(Double.random(in: -30...30)) * sin(position * 2 * .pi)))
+		return ProjectionTransform(CGAffineTransform(translationX: CGFloat(Double.random(in: -10...10)) * sin(position * 2 * .pi), y: CGFloat(Double.random(in: -10...10)) * sin(position * 2 * .pi)))
 		
 	}
 }
 
 
-class Dice: Identifiable, ObservableObject, Comparable {
-	@Published var id = UUID()
-	@Published var value = {()->Int in return Int.random(in: 1...6)}()
-	@Published var one = true
-	@Published var two = true
-	@Published var three = true
-	@Published var four = true
-	@Published var five = true
-	@Published var six = true
-	
-	static var diceSize: CGFloat = 10
-	private var d6 = {() -> Int in Int.random(in: 1...6)}
-	
-	//	Sorting
-	static func < (lhs: Dice, rhs: Dice) -> Bool {
-		if lhs.value != rhs.value {
-			return lhs.value < rhs.value
-		}
-		else {
-			return lhs.value > rhs.value
-		}
-	}
-	
-	static func == (lhs: Dice, rhs: Dice) -> Bool {
-		return lhs.value == rhs.value
-	}
-	func roll() {
-	if value == 1 {
-	
-	one = true
-	two = false
-	three = false
-	four = false
-	five = false
-	six = false
-	}
-	else if value == 2 {
-	
-	one = false
-	two = true
-	three = false
-	four = false
-	five = false
-	six = false
-	}
-	else if value == 3 {
-	
-	one = false
-	two = false
-	three = true
-	four = false
-	five = false
-	six = false
-	}
-	else if value == 4 {
-	
-	one = false
-	two = false
-	three = false
-	four = true
-	five = false
-	six = false
-	}
-	else if value == 5 {
-	
-	one = false
-	two = false
-	three = false
-	four = false
-	five = true
-	six = false
-	}
-	else if value == 6 {
-	
-	one = false
-	two = false
-	three = false
-	four = false
-	five = false
-	six = true
-	
-	}
-	}
-	init() {
-		roll()
-	}
-	//		self.diceSelected.toggle()
-}
-
-
 struct BasicDiceRollView: View {
 	@Environment(\.managedObjectContext) var moc
-	@ObservedObject var dice: Dice
+	@EnvironmentObject var dice: Dice
 	var diceSize = Dice.diceSize
-
-	@State public var diceSelected = false
+	
 	
 	
 	let d6 = {()->Int in return Int.random(in: 1..<7)}
 	
 	
-//	func diceRoll() {
-//		// empty Roll-Array
-//		self.rerollCount = 0
-//		//		self.DiceHaptic()
-//		self.hitRolls.removeAll(keepingCapacity: true)
-//
-//		//        For each dice add a diceObjet
-//		for _ in 0..<Int(self.numberOfDice) {
-//			let dice = Dice()
-//			let value = dice.value
-//			var one = dice.one
-//			var two = dice.two
-//			var three = dice.three
-//			var four = dice.four
-//			var five = dice.five
-//			var six = dice.six
-//
-//			hitRolls.append(dice)
-//
-//
-//		//		BasicDiceRollView().DiceHaptic()
-//		//		self.diceSelected.toggle()
-//		if value == 1 {
-//
-//			one = true
-//			two = false
-//			three = false
-//			four = false
-//			five = false
-//			six = false
-//		}
-//		else if value == 2 {
-//
-//			one = false
-//			two = true
-//			three = false
-//			four = false
-//			five = false
-//			six = false
-//		}
-//		else if value == 3 {
-//
-//			one = false
-//			two = false
-//			three = true
-//			four = false
-//			five = false
-//			six = false
-//		}
-//		else if value == 4 {
-//
-//			one = false
-//			two = false
-//			three = false
-//			four = true
-//			five = false
-//			six = false
-//		}
-//		else if value == 5 {
-//
-//			one = false
-//			two = false
-//			three = false
-//			four = false
-//			five = true
-//			six = false
-//		}
-//		else if value == 6 {
-//
-//			one = false
-//			two = false
-//			three = false
-//			four = false
-//			five = false
-//			six = true
-//
-//		}
-//		//		self.diceSelected.toggle()
-//		}
-//	}
+
 	@State private var numberOfDice = 5.0
 	@State private var diceToSave = 4
 	@State private var hitRolls: [Dice] = [Dice]()
 	@State private var hits = 0
-	private var diceRange = 0.0...100.0
+	private let diceRange = 0.0...100.0
 	@State private var rerolls = [false, false, false, false]
 	@State private var rerollCount = 0
 	
-	//	Haptic feedback
+	//	DiceArrays and sorting for viewing in columns
+	@State private var ones: [Dice] = [Dice]()
+	@State private var twos: [Dice] = [Dice]()
+	@State private var threes: [Dice] = [Dice]()
+	@State private var fours: [Dice] = [Dice]()
+	@State private var fives: [Dice] = [Dice]()
+	@State private var sixes: [Dice] = [Dice]()
 	
+	//	Haptic feedback
+	@State private var diceSelected = false
 	public func DiceHaptic() {
 		let feedbackGenerator = UIImpactFeedbackGenerator()
 		feedbackGenerator.prepare()
 		feedbackGenerator.impactOccurred()
 		
 	}
+	
+	//	Hits counter
 	func hitCalc() {
 		var hits = 0
 		for dice in self.hitRolls {
@@ -236,19 +75,21 @@ struct BasicDiceRollView: View {
 		
 		
 	}
+	
+	//	Rerolls
 	func ReRolls() {
 		for dice in self.hitRolls {
 			//			rr ones
 			if rerolls[0] == true && dice.value == 1{
 				dice.value = d6()
 				self.DiceHaptic()
-				
+					DiceValues()
 				self.rerollCount += 1
 			}
 				//			rr all
 			else if rerolls[1] == true {
 				dice.value = d6()
-				
+					DiceValues()
 				self.DiceHaptic()
 				self.rerollCount += 1
 			}
@@ -256,14 +97,14 @@ struct BasicDiceRollView: View {
 			else if rerolls[2] == true {
 				if dice.value < self.diceToSave {
 					dice.value = d6()
-					
+						DiceValues()
 					self.DiceHaptic()
 					self.rerollCount += 1
 				}
 			}
 			else if rerolls[3] && dice.value == 6 {
 				dice.value = d6()
-				
+					DiceValues()
 				self.DiceHaptic()
 				self.rerollCount += 1
 			}
@@ -272,43 +113,33 @@ struct BasicDiceRollView: View {
 		self.hitCalc()
 	}
 	
-	
-	
-	
-	//	DiceArrays.
-	@State private var ones = [Int]()
-	@State private var twos = [Int]()
-	@State private var threes = [Int]()
-	@State private var fours = [Int]()
-	@State private var fives = [Int]()
-	@State private var sixes = [Int]()
-	
+	//	Sorting dice into arrays for columns
 	func DiceValues() {
-		ones.removeAll(keepingCapacity: true)
-		twos.removeAll(keepingCapacity: true)
-		threes.removeAll(keepingCapacity: true)
-		fours.removeAll(keepingCapacity: true)
-		fives.removeAll(keepingCapacity: true)
-		sixes.removeAll(keepingCapacity: true)
-		for i in 0..<hitRolls.count {
-			let value = self.hitRolls[i].value
-			if value == 1 {
-				ones.append(value)
+		ones.removeAll(keepingCapacity: false)
+		twos.removeAll(keepingCapacity: false)
+		threes.removeAll(keepingCapacity: false)
+		fours.removeAll(keepingCapacity: false)
+		fives.removeAll(keepingCapacity: false)
+		sixes.removeAll(keepingCapacity: false)
+		for dice in hitRolls {
+			
+			if dice.value == 1 {
+				ones.append(dice)
 			}
-			if value == 2 {
-				twos.append(value)
+			if dice.value == 2 {
+				twos.append(dice)
 			}
-			if value == 3 {
-				threes.append(value)
+			if dice.value == 3 {
+				threes.append(dice)
 			}
-			if value == 4 {
-				fours.append(value)
+			if dice.value == 4 {
+				fours.append(dice)
 			}
-			if value == 5 {
-				fives.append(value)
+			if dice.value == 5 {
+				fives.append(dice)
 			}
-			if value == 6 {
-				sixes.append(value)
+			if dice.value == 6 {
+				sixes.append(dice)
 			}
 		}
 	}
@@ -368,212 +199,10 @@ struct BasicDiceRollView: View {
 						
 					}
 					//					DynamiDiceView
-					Group{
-						VStack{
-							Button(action: {self.diceSelected.toggle(); self.Roll(numberOfDice: Int(self.numberOfDice), diceToSave: self.diceToSave)}) {
-								
-								ZStack {
-									
-									RoundedRectangle(cornerRadius: diceSize/2)
-										.strokeBorder(lineWidth: diceSize/10, antialiased: true)
-										.frame(width: diceSize * 4, height: diceSize * 4, alignment: .center)
-									
-									ZStack{
-										//							center middledot
-										if dice.one || dice.five || dice.three {
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(0), y: CGFloat(0))
-											
-										}
-										if dice.three || dice.six || dice.five || dice.four {
-											//							Bottom corner right
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(diceSize*1.1), y: CGFloat(diceSize*1.1))
-										}
-										if dice.five || dice.six || dice.three || dice.four {
-											//							top corner left
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(-diceSize*1.1), y: CGFloat(-diceSize*1.1))
-										}
-										if dice.six {
-											//							right middle
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(diceSize*1.1), y: CGFloat(diceSize-diceSize))
-										}
-										if dice.six {
-											//							left midde
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(-diceSize*1.1), y: CGFloat(diceSize-diceSize))
-										}
-										if dice.five || dice.six || dice.two || dice.four {
-											//							right top corner
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(diceSize*1.1), y: CGFloat(-diceSize*1.1))
-										}
-										if dice.five || dice.six || dice.two || dice.four {
-											//							left bottom corner
-											Circle()
-												.frame(width: diceSize/1.2, height: diceSize/1.2, alignment: .center)
-												.offset(x: CGFloat(-diceSize*1.1), y: CGFloat(diceSize*1.1))
-										}
-									}
-									
-									
-									
-								}
-								.modifier(diceShake(position: diceSelected ? 1 : 0))
-								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-								.foregroundColor(.black)
-								.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
-								.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
-								
-								
-								
-								
-								
-							}
-							
-							
-						}
-						.onAppear(){
-							
-							self.diceSelected.toggle()
-						}
-						.onDisappear(){
-							
-							self.diceSelected.toggle()
-						}
-						
+					ForEach(ones, id: \.id){ dice in
+						DynamicDice(value: dice.value).dynamicDice(value: dice.value)
 					}
-					
-					//				DiceImages in VStacks
-					Group{
-						HStack{
-							//								Diceimages
-							VStack{
-								
-								if ones.count > 0 {
-									Text("ones: \(ones.count)")
-										.font(.caption)
-								}
-								
-								ForEach(ones, id: \.self) { one in
-									VStack{
-										
-										Image("dice\(one)")
-											.resizable()
-											.frame(width: 30, height: 30, alignment: .top)
-											.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-											.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								Spacer()
-							}
-							VStack{
-								
-								if twos.count > 0 {
-									Text("twos: \(twos.count)")
-										.font(.caption)
-								}
-								
-								ForEach(twos, id: \.self) { two in
-									VStack{
-//										DynamicDiceView(diceSelected: self.diceSelected, numberOfDice: Int(self.numberOfDice))
-																			Image("dice\(two)")
-																				.resizable()
-																				.frame(width: 30, height: 30, alignment: .top)
-																				.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-																				.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								Spacer()
-							}
-							VStack{
-								
-								if threes.count > 0 {
-									Text("threes: \(threes.count)")
-										.font(.caption)
-								}
-								
-								ForEach(threes, id: \.self) { three in
-									VStack{
-//										DynamicDiceView(diceSelected: self.diceSelected, numberOfDice: Int(self.numberOfDice))
-																			Image("dice\(three)")
-																				.resizable()
-																				.frame(width: 30, height: 30, alignment: .top)
-																				.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-																				.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								Spacer()
-							}
-							VStack{
-								
-								if fours.count > 0 {
-									Text("fours: \(fours.count)")
-										.font(.caption)
-									
-								}
-								
-								ForEach(fours, id: \.self) { one in
-									VStack{
-//										DynamicDiceView(diceSelected: self.diceSelected, numberOfDice: Int(self.numberOfDice))
-																			Image("dice\(one)")
-																				.resizable()
-																				.frame(width: 30, height: 30, alignment: .top)
-																				.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-																				.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								Spacer()
-							}
-							VStack{
-								if fives.count > 0 {
-									Text("fives: \(fives.count)")
-										.font(.caption)
-								}
-								
-								ForEach(fives, id: \.self) { five in
-									VStack{
-//										DynamicDiceView(diceSelected: self.diceSelected, numberOfDice: Int(self.numberOfDice))
-										Image("dice\(five)")
-											.resizable()
-											.frame(width: 30, height: 30, alignment: .top)
-											.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-											.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								Spacer()
-							}
-							VStack{
-								if sixes.count > 0 {
-									Text("sixes: \(sixes.count)")
-										.font(.caption)
-								}
-								
-								ForEach(sixes, id: \.self) { six in
-									VStack{
-//										DynamicDiceView(diceSelected: self.diceSelected, numberOfDice: Int(self.numberOfDice))
-										Image("dice\(six)")
-											.resizable()
-											.frame(width: 30, height: 30, alignment: .top)
-											.shadow(color: .lightEnd, radius: 5, x: 5, y: 5)
-											.shadow(color: .lightStart, radius: 5, x: -5, y: -5)
-									}
-								}
-								
-								Spacer()
-							}
-						}
-						Spacer()
-						
-					}
+//					DynamicDiceView(diceSelected: $diceSelected, ones: $ones, twos: $twos, threes: $threes, fours: $fours, fives: $fives, sixes: $sixes)
 				}
 				VStack{
 					//				diceStats
@@ -606,6 +235,7 @@ struct BasicDiceRollView: View {
 									self.rerolls[0] = true
 									self.ReRolls()
 									self.hitCalc()
+									self.DiceValues()
 									self.rerolls[0] = false
 									
 								}
@@ -616,6 +246,7 @@ struct BasicDiceRollView: View {
 									self.rerolls[3] = true
 									self.ReRolls()
 									self.hitCalc()
+									self.DiceValues()
 									self.rerolls[3] = false
 									
 								}
@@ -625,6 +256,7 @@ struct BasicDiceRollView: View {
 									self.rerolls[2] = true
 									self.ReRolls()
 									self.hitCalc()
+									self.DiceValues()
 									self.rerolls[2] = false
 									
 								}
@@ -635,6 +267,7 @@ struct BasicDiceRollView: View {
 									self.rerolls[1] = true
 									self.ReRolls()
 									self.hitCalc()
+									self.DiceValues()
 									self.rerolls[1] = false
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -681,14 +314,32 @@ struct BasicDiceRollView: View {
 					Spacer()
 					HStack{
 						Button("Roll") {
-							Dice().Roll(numberOfDice: Int(self.numberOfDice), diceToSave: self.diceToSave)
+							self.hitRolls.removeAll(keepingCapacity: false)
+							
+							
+							for _ in 0..<Int(self.numberOfDice) {
+								self.hitRolls.append(Dice())
+								
+								
+							}
+							self.DiceValues()
+							self.hitCalc()
+						
 						}
 						.buttonStyle(LightButtonStyle(shape: Circle()))
 						.padding()
 						if self.hits > 0 {
 							Button("Roll kept dice") {
-								self.Roll(numberOfDice: Int(self.hits), diceToSave: self.diceToSave)
+								self.hitRolls.removeAll(keepingCapacity: false)
 								
+								
+								for _ in 0..<self.hits {
+									self.hitRolls.append(Dice())
+									
+									
+								}
+								self.DiceValues()
+								self.hitCalc()
 							}
 							.buttonStyle(LightButtonStyle(shape: Circle()))
 							.padding()
@@ -709,10 +360,13 @@ struct BasicDiceRollView: View {
 }
 
 
-	struct BasicDiceRollView_Previews: PreviewProvider {
+struct BasicDiceRollView_Previews: PreviewProvider {
+	
+	static var previews: some View {
+		BasicDiceRollView().environmentObject(Dice())
 		
-		static var previews: some View {
-			BasicDiceRollView()
-			
-		}
+	}
 }
+
+
+
