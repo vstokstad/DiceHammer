@@ -20,18 +20,10 @@ struct ContentView: View {
 	@State private var addProfileViewShowing = false
 	@State private var savedProfilesViewShowing = false
 	@State private var comBineProfileViewShowing = false
-//	@State private var selection: Int = 0
-//	@ObservedObject var avgDmg = AvgDmg()
-//	    var d6 = Int.random(in: 1...6)
+
 	
 	@State private var attacks = 1.0
-//	@State private var toHit = 2
-//	@State private var toWound = 2
-//	@State private var toRend = 1
-//	@State private var toSave = 4
-//	@State private var damage = 1
-//	@State private var d3Toggle = false
-//	@State private var d6Toggle = false
+
 
 	var body: some View {
 		
@@ -40,49 +32,16 @@ struct ContentView: View {
 				.edgesIgnoringSafeArea(.all)
 //			ScrollView{
 			VStack{
-//				TabView(selection: $selection){
 					
-					//					DiceRollView
+//					DiceRollView
 					BasicDiceRollView().environment(\.managedObjectContext, self.moc)
 						
 						
-//						.tabItem {
-//							VStack {
-//								Image(systemName: "square")
-//								Text("Basic DiceRoller")
-//							}
-//							}
-//							.tag(0)
-							
-							
-//							//						First View
-//							AvgDmgCalcView().environment(\.managedObjectContext, self.moc)
-//								.tabItem {
-//									VStack {
-//										Image(systemName: "shield")
-//										Text("AvgDmg")
-//									}
-//							}
-//							.tag(1)
-							
-							//				VStack{
-							//					Text("third View")
-							//				}
-							//					//					Third view
-							//					.tabItem {
-							//						VStack {
-							//							Image(systemName: "star")
-							//							Text("Basic DiceRoll")
-							//						}
-							//				}
-							//				.tag(2)
-					
-					
 					
 				}
 				
 				
-//			}
+
 			
 		}
 	}
