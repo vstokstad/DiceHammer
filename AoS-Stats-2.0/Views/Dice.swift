@@ -20,7 +20,7 @@ class Dice: Identifiable, ObservableObject, Comparable {
 	@Published var five = true
 	@Published var six = true
 	
-	static var diceSize: CGFloat = 10
+	static var diceSize: CGFloat = 8
 	var d6 = {()->Int in return Int.random(in: 1..<7)}
 	
 	//	Sorting

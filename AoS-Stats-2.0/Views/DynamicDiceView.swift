@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 class DynamicDice: ObservableObject {
 	@State private var diceSelected: Bool
-var value = 0
+	var value = 0
 	var diceSize: CGFloat = Dice.diceSize
 	func dynamicDice(value: Int) -> some View {
 		var dice: some View {
