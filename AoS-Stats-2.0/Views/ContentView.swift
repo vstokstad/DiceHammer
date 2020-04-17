@@ -27,13 +27,9 @@ struct ContentView: View {
 
 	var body: some View {
 		
-		ZStack{
-			LinearGradient(Color.lightStart, Color.lightEnd)
-				.edgesIgnoringSafeArea(.all)
-//			ScrollView{
+
+
 			VStack{
-					
-//					DiceRollView
 					BasicDiceRollView().environment(\.managedObjectContext, self.moc)
 						
 						
@@ -43,7 +39,7 @@ struct ContentView: View {
 				
 
 			
-		}
+
 	}
 }
 
