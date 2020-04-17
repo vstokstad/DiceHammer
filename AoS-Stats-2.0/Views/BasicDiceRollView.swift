@@ -37,8 +37,8 @@ struct BasicDiceRollView: View {
 	let d6 = {()->Int in return Int.random(in: 1..<7)}
 	
 	
-
-	@State private var numberOfDice = 5.0
+	@State private var showRerolls = false
+	@State private var numberOfDice = 10.0
 	@State private var diceToSave = 4
 	@State private var hitRolls: [Dice] = [Dice]()
 	@State private var hits = 0
@@ -85,14 +85,14 @@ struct BasicDiceRollView: View {
 				dice.value = d6()
 			
 					DiceValues()
-				self.rerollCount += 1
+				
 			}
 				//			rr all
 			else if rerolls[1] == true {
 				dice.value = d6()
 					DiceValues()
 			
-				self.rerollCount += 1
+				
 			}
 				//				rr failed
 			else if rerolls[2] == true {
@@ -100,16 +100,17 @@ struct BasicDiceRollView: View {
 					dice.value = d6()
 						DiceValues()
 					
-					self.rerollCount += 1
+				
 				}
 			}
 			else if rerolls[3] && dice.value == 6 {
 				dice.value = d6()
 					DiceValues()
 			
-				self.rerollCount += 1
+				
 			}
 		}
+		self.rerollCount += 1
 		DiceValues()
 		self.hitCalc()
 	}
@@ -156,52 +157,51 @@ struct BasicDiceRollView: View {
 					Text("Basic Dice Roller")
 						.font(.title)
 						.padding(.horizontal, 10)
-					Spacer()
+			Spacer()
 				}
 				
 				
 				ScrollView(showsIndicators: true){
 					
 					
-					//				Header & Dice
+					//	Header & Dice
 					Group{
 						
 						// Number of Dice
 						VStack{
-							Spacer()
 							HStack{
-								
+								Spacer()
 								Text("Dice: \(self.numberOfDice, specifier: "%.0f")")
-									.padding(.trailing)
-								
-								Button("-"){
-									if self.numberOfDice != 0 {
-										self.numberOfDice -= 1.0
-									}
-								}
-								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-								.animation(nil)
-								
-								Button("+"){
-									if self.numberOfDice != 100 {
-										self.numberOfDice += 1.0
-									}
-								}
-								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							.animation(nil)
-								
+									
+								Spacer()
+							
+//								Button("-"){
+//									if self.numberOfDice != 0 {
+//										self.numberOfDice -= 1.0
+//									}
+//								}
+//								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+//
+//
+//
+//								Button("+"){
+//									if self.numberOfDice != 100 {
+//										self.numberOfDice += 1.0
+//									}
+//								}
+//								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
+//
+//								Spacer()
 							}
 							
 							Slider(value: $numberOfDice, in: diceRange, step: 1.0)
 							
 							
 						}
-						.padding()
-						
-						
-						
+						.padding(.horizontal)
+					
 					}
-					//					DynamiDiceView
+					//	DynamiDiceView
 					HStack(alignment: .top, spacing: 2, content: {
 						VStack{
 							if ones.count != 0 {
@@ -239,10 +239,7 @@ struct BasicDiceRollView: View {
 						}
 						VStack{
 							if fives.count != 0 {
-								ZStack{
-									
 									Text("\(fives.count)").font(.caption)
-								}
 						ForEach(fives, id: \.id){ dice in
 							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
 							
@@ -264,39 +261,68 @@ struct BasicDiceRollView: View {
 					})
 						.onAppear(){
 							self.DiceHaptic()
-								
-							
 					}
 						.onTapGesture {
 							self.DiceHaptic()
-							
-							
+
 						}
 					
 				}
 				
 				VStack{
 					//				diceStats
-					if !hitRolls.isEmpty {
+				
 						Group{
 							HStack{
 								Text("Failed: \(self.hitRolls.count-self.hits)")
 									.font(.caption)
 									.padding()
 								Text("Successful: \(self.hits)")
-									.font(.subheadline)
+									.font(.caption)
 								Text("Rerolls: \(self.rerollCount)")
 									.font(.caption)
 									.padding()
 							}
 							
+						
+					}
+					//				Dice to keep och Rolls
+					Group{
+						HStack{
+							Text("Dice to keep: \(diceToSave)+")
+								.font(.caption)
+								.padding(.trailing)
+							Button("-"){
+								if self.diceToSave != 1 {
+									self.diceToSave -= 1
+									self.hitCalc()
+								}
+							}
+							.buttonStyle(LightButtonStyle(shape: Circle()))
+							
+							
+							Button("+"){
+								if self.diceToSave != 6 {
+									self.diceToSave += 1
+									self.hitCalc()
+								}
+							}
+							.buttonStyle(LightButtonStyle(shape: Circle()))
+							
+							
+							
+							
+							
 						}
+						.padding()
+						
 					}
 					//        		Rerolls
 					Group{
+					
+						if showRerolls == true {
 						VStack{
-							Text("Rerolls")
-								.font(.subheadline)
+						
 							HStack{
 								Button("1s"){
 									self.rerolls[0] = true
@@ -304,6 +330,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[0] = false
+									self.showRerolls.toggle()
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -315,6 +342,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[3] = false
+									self.showRerolls.toggle()
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -325,6 +353,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[2] = false
+									self.showRerolls.toggle()
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -336,50 +365,37 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[1] = false
+									self.showRerolls.toggle()
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
 								.font(.caption)
 								
+							
 							}
-							.padding()
-						}
-					}
-					
-					//				Dice to keep och Rolls
-					Group{
-						HStack{
-							Text("Dice to keep: \(diceToSave)+")
-								.font(.subheadline)
-								.padding(.trailing)
-							Button("-"){
-								if self.diceToSave != 1 {
-									self.diceToSave -= 1
-									self.hitCalc()
-								}
-							}
-							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							
-							
-							Button("+"){
-								if self.diceToSave != 6 {
-									self.diceToSave += 1
-									self.hitCalc()
-								}
-							}
-							.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-							
-							
-							
-							
-							
-						}
+						.animation(nil)
 						.padding()
-						
+						}
+						}
 					}
 					
+			
 					
-					Spacer()
+					
+			
 					HStack{
+						
+							HStack{
+								Button("Rerolls"){
+									self.showRerolls.toggle()
+								}
+								.font(.caption)
+								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 20)))
+								
+							.animation(nil)
+								
+								
+							}
+						
 						Button("Roll") {
 							self.hitRolls.removeAll(keepingCapacity: false)
 							
@@ -396,26 +412,27 @@ struct BasicDiceRollView: View {
 						}
 						.buttonStyle(LightButtonStyle(shape: Circle()))
 						.padding()
-						if self.hits > 0 {
-							Button("Roll kept dice") {
-								self.hitRolls.removeAll(keepingCapacity: false)
+						
+						Button("Roll kept") {
+							self.hitRolls.removeAll(keepingCapacity: false)
+							
+							
+							for _ in 0..<self.hits {
+								self.hitRolls.append(Dice())
 								
-								
-								for _ in 0..<self.hits {
-									self.hitRolls.append(Dice())
-									
-										self.diceSelected.toggle()
-								}
-								
-								self.DiceValues()
-								self.hitCalc()
+								self.diceSelected.toggle()
 							}
-							.buttonStyle(LightButtonStyle(shape: Circle()))
-							.padding()
-							.font(.caption)
-							.multilineTextAlignment(.center)
-							.disabled(self.hits==0)
+							
+							self.DiceValues()
+							self.hitCalc()
+							self.showRerolls.toggle()
 						}
+						.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 20)))
+							
+						.font(.caption)
+						.multilineTextAlignment(.center)
+						.disabled(self.hits==0)
+						
 					}}.offset(x: 0, y: 0).frame(width: UIScreen.main.bounds.width).background(LightBackground(isHighlighted: false, shape: RoundedRectangle(cornerRadius: 10.0))).edgesIgnoringSafeArea(.bottom)
 				
 				

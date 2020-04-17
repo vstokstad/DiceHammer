@@ -15,8 +15,8 @@ extension LinearGradient {
 
 extension Color {
 	static let offWhite = Color(red: 240 / 255, green: 240 / 255, blue: 255 / 255)
-	static let lightStart = Color(red: 240 / 255, green: 240 / 255, blue: 245 / 255)
-	static let lightEnd = Color(red: 210 / 255, green: 210 / 255, blue: 220 / 255)
+	static let lightStart = Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)
+	static let lightEnd = Color(red: 200 / 255, green: 200 / 255, blue: 200 / 255)
 
 	
 }
@@ -26,7 +26,7 @@ struct LightButtonStyle<S: Shape>: ButtonStyle {
 	var shape: S
 	func makeBody(configuration: Self.Configuration) -> some View {
 		configuration.label
-			.padding(25)
+			.padding(15)
 			.contentShape(shape)
 			.background(
 				LightBackground(isHighlighted: configuration.isPressed, shape: shape)
@@ -55,10 +55,10 @@ struct LightBackground<S: Shape>: View {
 			else {
 				shape
 					.fill(LinearGradient(Color.lightStart, Color.lightEnd))
-					.overlay(shape.stroke(LinearGradient(Color.lightStart, Color.lightEnd), lineWidth: 2).blur(radius: 0.1))
-					.overlay(shape.stroke(LinearGradient(Color.lightEnd, Color.lightStart), lineWidth: 0.3).blur(radius: 0.1))
+					.overlay(shape.stroke(LinearGradient(Color.lightStart, Color.lightEnd), lineWidth: 4).blur(radius: 0.2))
+					.overlay(shape.stroke(LinearGradient(Color.lightEnd, Color.lightStart), lineWidth: 0.9))
 					.shadow(color: Color.lightEnd, radius: 8, x: 8, y: 8)
-					.shadow(color: Color.lightStart, radius: 10, x: -10, y: -10)
+					.shadow(color: Color.lightStart, radius: 8, x: -8, y: -8)
 				
 			}
 		}
@@ -73,7 +73,7 @@ struct NeoMorphView: View {
 			Button("Button"){
 				
 			}
-		.buttonStyle(LightButtonStyle(shape: Circle()))
+		.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
 			.font(.caption)
 		
 		}

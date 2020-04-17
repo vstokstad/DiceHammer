@@ -36,6 +36,7 @@ class Dice: Identifiable, ObservableObject, Comparable {
 	static func == (lhs: Dice, rhs: Dice) -> Bool {
 		return lhs.value == rhs.value
 	}
+	
 	func roll(value: Int) {
 		if value == 1 {
 			
