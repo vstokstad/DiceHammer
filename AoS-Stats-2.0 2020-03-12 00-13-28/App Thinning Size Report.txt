@@ -1,0 +1,57 @@
+
+App Thinning Size Report for All Variants of AoS-Stats-2.0
+
+Variant: AoS-Stats-2.0-013DD9AF-D43E-4AFE-8A70-953A1052C1B8.ipa
+Supported variant descriptors: [device: iPad8,6, os-version: 13.0], [device: iPad8,4, os-version: 13.0], [device: iPad11,2, os-version: 13.0], [device: iPad8,1, os-version: 13.0], [device: iPad8,8, os-version: 13.0], [device: iPad11,1, os-version: 13.0], [device: iPad7,3, os-version: 13.0], [device: iPad11,4, os-version: 13.0], [device: iPad8,2, os-version: 13.0], [device: iPad7,2, os-version: 13.0], [device: iPad8,5, os-version: 13.0], [device: iPad8,7, os-version: 13.0], [device: iPad6,3, os-version: 13.0], [device: iPad7,4, os-version: 13.0], [device: iPad6,4, os-version: 13.0], [device: iPad8,3, os-version: 13.0], [device: iPad11,3, os-version: 13.0], and [device: iPad7,1, os-version: 13.0]
+App + On Demand Resources size: 141 KB compressed, 408 KB uncompressed
+App size: 141 KB compressed, 408 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-08C47961-C3F7-4266-979C-203E33B18627.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 13.0] and [device: iPhone12,1, os-version: 13.0]
+App + On Demand Resources size: 147 KB compressed, 414 KB uncompressed
+App size: 147 KB compressed, 414 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-53FEC570-2C3F-4E8A-9C56-228D77302F51.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 13.0]
+App + On Demand Resources size: 148 KB compressed, 414 KB uncompressed
+App size: 148 KB compressed, 414 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-55914F3D-DA76-47EC-B437-21C33E3A3DC2.ipa
+Supported variant descriptors: [device: iPhone11,6, os-version: 13.0], [device: iPhone11,4, os-version: 13.0], [device: iPhone12,5, os-version: 13.0], [device: iPhone11,2, os-version: 13.0], [device: iPhone10,3, os-version: 13.0], [device: iPhone10,6, os-version: 13.0], [device: iPhone10,2, os-version: 13.0], [device: iPhone10,5, os-version: 13.0], [device: iPhone9,4, os-version: 13.0], [device: iPhone12,3, os-version: 13.0], and [device: iPhone9,2, os-version: 13.0]
+App + On Demand Resources size: 148 KB compressed, 415 KB uncompressed
+App size: 148 KB compressed, 415 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-997F1C9C-CC93-4EE0-8BF7-3E53B3E8BAE6.ipa
+Supported variant descriptors: [device: iPhone10,1, os-version: 13.0], [device: iPhone9,1, os-version: 13.0], [device: iPhone10,4, os-version: 13.0], and [device: iPhone9,3, os-version: 13.0]
+App + On Demand Resources size: 141 KB compressed, 407 KB uncompressed
+App size: 141 KB compressed, 407 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-D4AA15CF-F818-491F-8210-170B902EA3FB.ipa
+Supported variant descriptors: [device: iPad6,7, os-version: 13.0], [device: iPad6,8, os-version: 13.0], [device: iPad5,3, os-version: 13.0], [device: iPad7,6, os-version: 13.0], [device: iPad5,1, os-version: 13.0], [device: iPad5,4, os-version: 13.0], [device: iPad6,12, os-version: 13.0], [device: iPad5,2, os-version: 13.0], [device: iPad7,5, os-version: 13.0], [device: iPad7,11, os-version: 13.0], [device: iPad6,11, os-version: 13.0], and [device: iPad7,12, os-version: 13.0]
+App + On Demand Resources size: 141 KB compressed, 407 KB uncompressed
+App size: 141 KB compressed, 407 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0-F93C51E8-B9EF-48B6-9591-A64E6B3410F9.ipa
+Supported variant descriptors: [device: iPhone8,1, os-version: 13.0], [device: iPod9,1, os-version: 13.0], and [device: iPhone8,4, os-version: 13.0]
+App + On Demand Resources size: 141 KB compressed, 407 KB uncompressed
+App size: 141 KB compressed, 407 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: AoS-Stats-2.0.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 217 KB compressed, 491 KB uncompressed
+App size: 217 KB compressed, 491 KB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

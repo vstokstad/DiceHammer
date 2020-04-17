@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AoS-Stats-2.0.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>073B08BB1DCB39610336E1A32E63B605CD4F2AE8</string>
+				<key>dateExpires</key>
+				<string>2021-01-23</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>GMM4866YZR.Vilhelm-Stokstad.AoS-Stats-2-0</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>GMM4866YZR</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>GMM4866YZR.Vilhelm-Stokstad.AoS-Stats-2-0</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>AoS-Stats-2.0.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>1b73101c-7d95-46e0-aa3f-405c4941a580</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: Vilhelm-Stokstad.AoS-Stats-2-0</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>GMM4866YZR</string>
+				<key>name</key>
+				<string>Vilhelm Stokstad</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
