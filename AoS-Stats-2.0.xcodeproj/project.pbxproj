@@ -57,7 +57,7 @@
 		7C3CD43E24111FCE007239CE /* AvgDmgCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmgCalcView.swift; sourceTree = "<group>"; };
 		7C3CD4402411404C007239CE /* AddUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUnitView.swift; sourceTree = "<group>"; };
 		7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SavedProfilesView.swift; path = "AoS-Stats-2.0/Views/AvgDmgCalc/SavedProfilesView.swift"; sourceTree = SOURCE_ROOT; };
-		7C682D5523D324370028A496 /* DiceHammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceHammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D5823D324370028A496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C682D5A23D324370028A496 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7C682D5D23D324370028A496 /* AoS_Stats_2_0.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = AoS_Stats_2_0.xcdatamodel; sourceTree = "<group>"; };
@@ -66,10 +66,10 @@
 		7C682D6423D324380028A496 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7C682D6723D324380028A496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C682D6923D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C682D6E23D324380028A496 /* DiceHammerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceHammerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C682D6E23D324380028A496 /* AoS-Stats-2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AoS-Stats-2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D7223D324380028A496 /* AoS_Stats_2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoS_Stats_2_0Tests.swift; sourceTree = "<group>"; };
 		7C682D7423D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C682D7923D324380028A496 /* DiceHammerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceHammerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AoS-Stats-2.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoS_Stats_2_0UITests.swift; sourceTree = "<group>"; };
 		7C682D7F23D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C682D8B23D63CD40028A496 /* AvgDmg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmg.swift; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		7C682D4C23D324370028A496 = {
 			isa = PBXGroup;
 			children = (
-				7C682D5723D324370028A496 /* DiceHammer */,
-				7C682D7123D324380028A496 /* DiceHammer.0Tests */,
+				7C682D5723D324370028A496 /* AoS-Stats-2.0 */,
+				7C682D7123D324380028A496 /* AoS-Stats-2.0Tests */,
 				7C682D7C23D324380028A496 /* AoS-Stats-2.0UITests */,
 				7CB12D552409073400B7A858 /* NeoMorph */,
 				7C682D5623D324370028A496 /* Products */,
@@ -153,15 +153,15 @@
 		7C682D5623D324370028A496 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C682D5523D324370028A496 /* DiceHammer.app */,
-				7C682D6E23D324380028A496 /* DiceHammerTests.xctest */,
-				7C682D7923D324380028A496 /* DiceHammerUITests.xctest */,
+				7C682D5523D324370028A496 /* AoS-Stats-2.0.app */,
+				7C682D6E23D324380028A496 /* AoS-Stats-2.0Tests.xctest */,
+				7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */,
 				7CB12D542409073400B7A858 /* NeoMorph.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7C682D5723D324370028A496 /* DiceHammer */ = {
+		7C682D5723D324370028A496 /* AoS-Stats-2.0 */ = {
 			isa = PBXGroup;
 			children = (
 				7C06EA62240A8B83008F515C /* NeoMorphView.swift */,
@@ -175,7 +175,7 @@
 				7C682D5C23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld */,
 				7C682D6323D324380028A496 /* Preview Content */,
 			);
-			path = DiceHammer;
+			path = "AoS-Stats-2.0";
 			sourceTree = "<group>";
 		};
 		7C682D6323D324380028A496 /* Preview Content */ = {
@@ -186,13 +186,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		7C682D7123D324380028A496 /* DiceHammer.0Tests */ = {
+		7C682D7123D324380028A496 /* AoS-Stats-2.0Tests */ = {
 			isa = PBXGroup;
 			children = (
 				7C682D7223D324380028A496 /* AoS_Stats_2_0Tests.swift */,
 				7C682D7423D324380028A496 /* Info.plist */,
 			);
-			path = DiceHammer.0Tests;
+			path = "AoS-Stats-2.0Tests";
 			sourceTree = "<group>";
 		};
 		7C682D7C23D324380028A496 /* AoS-Stats-2.0UITests */ = {
@@ -241,9 +241,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7C682D5423D324370028A496 /* DiceHammer */ = {
+		7C682D5423D324370028A496 /* AoS-Stats-2.0 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C682D8223D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammer" */;
+			buildConfigurationList = 7C682D8223D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0" */;
 			buildPhases = (
 				7C682D5123D324370028A496 /* Sources */,
 				7C682D5223D324370028A496 /* Frameworks */,
@@ -253,14 +253,14 @@
 			);
 			dependencies = (
 			);
-			name = DiceHammer;
+			name = "AoS-Stats-2.0";
 			productName = "AoS-Stats-2.0";
-			productReference = 7C682D5523D324370028A496 /* DiceHammer.app */;
+			productReference = 7C682D5523D324370028A496 /* AoS-Stats-2.0.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7C682D6D23D324380028A496 /* DiceHammerTests */ = {
+		7C682D6D23D324380028A496 /* AoS-Stats-2.0Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C682D8523D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammerTests" */;
+			buildConfigurationList = 7C682D8523D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0Tests" */;
 			buildPhases = (
 				7C682D6A23D324380028A496 /* Sources */,
 				7C682D6B23D324380028A496 /* Frameworks */,
@@ -271,14 +271,14 @@
 			dependencies = (
 				7C682D7023D324380028A496 /* PBXTargetDependency */,
 			);
-			name = DiceHammerTests;
+			name = "AoS-Stats-2.0Tests";
 			productName = "AoS-Stats-2.0Tests";
-			productReference = 7C682D6E23D324380028A496 /* DiceHammerTests.xctest */;
+			productReference = 7C682D6E23D324380028A496 /* AoS-Stats-2.0Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7C682D7823D324380028A496 /* DiceHammerUITests */ = {
+		7C682D7823D324380028A496 /* AoS-Stats-2.0UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C682D8823D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammerUITests" */;
+			buildConfigurationList = 7C682D8823D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0UITests" */;
 			buildPhases = (
 				7C682D7523D324380028A496 /* Sources */,
 				7C682D7623D324380028A496 /* Frameworks */,
@@ -289,9 +289,9 @@
 			dependencies = (
 				7C682D7B23D324380028A496 /* PBXTargetDependency */,
 			);
-			name = DiceHammerUITests;
+			name = "AoS-Stats-2.0UITests";
 			productName = "AoS-Stats-2.0UITests";
-			productReference = 7C682D7923D324380028A496 /* DiceHammerUITests.xctest */;
+			productReference = 7C682D7923D324380028A496 /* AoS-Stats-2.0UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		7CB12D532409073400B7A858 /* NeoMorph */ = {
@@ -337,7 +337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7C682D5023D324370028A496 /* Build configuration list for PBXProject "DiceHammer" */;
+			buildConfigurationList = 7C682D5023D324370028A496 /* Build configuration list for PBXProject "AoS-Stats-2.0" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -350,9 +350,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7C682D5423D324370028A496 /* DiceHammer */,
-				7C682D6D23D324380028A496 /* DiceHammerTests */,
-				7C682D7823D324380028A496 /* DiceHammerUITests */,
+				7C682D5423D324370028A496 /* AoS-Stats-2.0 */,
+				7C682D6D23D324380028A496 /* AoS-Stats-2.0Tests */,
+				7C682D7823D324380028A496 /* AoS-Stats-2.0UITests */,
 				7CB12D532409073400B7A858 /* NeoMorph */,
 			);
 		};
@@ -448,12 +448,12 @@
 /* Begin PBXTargetDependency section */
 		7C682D7023D324380028A496 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7C682D5423D324370028A496 /* DiceHammer */;
+			target = 7C682D5423D324370028A496 /* AoS-Stats-2.0 */;
 			targetProxy = 7C682D6F23D324380028A496 /* PBXContainerItemProxy */;
 		};
 		7C682D7B23D324380028A496 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7C682D5423D324370028A496 /* DiceHammer */;
+			target = 7C682D5423D324370028A496 /* AoS-Stats-2.0 */;
 			targetProxy = 7C682D7A23D324380028A496 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -606,9 +606,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.DiceHammer";
-				PRODUCT_NAME = DiceHammer;
+				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -628,9 +627,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.DiceHammer";
-				PRODUCT_NAME = DiceHammer;
+				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -654,7 +652,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiceHammer.app/DiceHammer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AoS-Stats-2.0.app/AoS-Stats-2.0";
 			};
 			name = Debug;
 		};
@@ -676,7 +674,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiceHammer.app/DiceHammer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AoS-Stats-2.0.app/AoS-Stats-2.0";
 			};
 			name = Release;
 		};
@@ -767,7 +765,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7C682D5023D324370028A496 /* Build configuration list for PBXProject "DiceHammer" */ = {
+		7C682D5023D324370028A496 /* Build configuration list for PBXProject "AoS-Stats-2.0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C682D8023D324380028A496 /* Debug */,
@@ -776,7 +774,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C682D8223D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammer" */ = {
+		7C682D8223D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C682D8323D324380028A496 /* Debug */,
@@ -785,7 +783,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C682D8523D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammerTests" */ = {
+		7C682D8523D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C682D8623D324380028A496 /* Debug */,
@@ -794,7 +792,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C682D8823D324380028A496 /* Build configuration list for PBXNativeTarget "DiceHammerUITests" */ = {
+		7C682D8823D324380028A496 /* Build configuration list for PBXNativeTarget "AoS-Stats-2.0UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C682D8923D324380028A496 /* Debug */,

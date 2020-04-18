@@ -17,7 +17,7 @@
                BlueprintIdentifier = "7CB12D532409073400B7A858"
                BuildableName = "NeoMorph.app"
                BlueprintName = "NeoMorph"
-               ReferencedContainer = "container:DiceHammer.xcodeproj">
+               ReferencedContainer = "container:AoS-Stats-2.0.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,14 +47,14 @@
             BlueprintIdentifier = "7CB12D532409073400B7A858"
             BuildableName = "NeoMorph.app"
             BlueprintName = "NeoMorph"
-            ReferencedContainer = "container:DiceHammer.xcodeproj">
+            ReferencedContainer = "container:AoS-Stats-2.0.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "SwiftUI"
+      savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "7CB12D532409073400B7A858"
             BuildableName = "NeoMorph.app"
             BlueprintName = "NeoMorph"
-            ReferencedContainer = "container:DiceHammer.xcodeproj">
+            ReferencedContainer = "container:AoS-Stats-2.0.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
