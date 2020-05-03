@@ -9,10 +9,13 @@
 import Foundation
 import SwiftUI
 import Combine
+import MultipeerKit
+
 class DynamicDice: ObservableObject {
 	@State private var diceSelected: Bool
 	var value = 0
 	var diceSize: CGFloat = Dice.diceSize
+	
 	func dynamicDice(value: Int) -> some View {
 		var dice: some View {
 			
@@ -32,7 +35,8 @@ class DynamicDice: ObservableObject {
 						}
 						.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 						.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-						.foregroundColor(.black)
+						.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
+						.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 					}
 				}
 				else if value == 2 {
@@ -59,7 +63,7 @@ class DynamicDice: ObservableObject {
 					}
 					.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 					.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-					.foregroundColor(.black)
+					
 					.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 					.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 				}
@@ -93,7 +97,7 @@ class DynamicDice: ObservableObject {
 								}
 								.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-								.foregroundColor(.black)
+							
 								.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 								.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 							}
@@ -129,7 +133,7 @@ class DynamicDice: ObservableObject {
 								}
 								.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-								.foregroundColor(.black)
+							
 								.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 								.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 							}
@@ -173,7 +177,7 @@ class DynamicDice: ObservableObject {
 								}
 								.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-								.foregroundColor(.black)
+							
 								.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 								.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 							}
@@ -225,7 +229,7 @@ class DynamicDice: ObservableObject {
 								}
 								.modifier(diceShake(position: self.diceSelected ? 1 : 0))
 								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
-								.foregroundColor(.black)
+							
 								.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 								.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
 							}
@@ -237,5 +241,11 @@ class DynamicDice: ObservableObject {
 	init(value: Int, diceSelected: Bool) {
 		self.value = value
 		self.diceSelected = diceSelected
+	}
+}
+
+struct DynamicDiceView_Previews: PreviewProvider {
+	static var previews: some View {
+		ContentView()
 	}
 }

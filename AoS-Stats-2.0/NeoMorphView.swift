@@ -15,9 +15,11 @@ extension LinearGradient {
 
 extension Color {
 	static let offWhite = Color(red: 240 / 255, green: 240 / 255, blue: 255 / 255)
-	static let lightStart = Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)
-	static let lightEnd = Color(red: 200 / 255, green: 200 / 255, blue: 200 / 255)
-
+	static var lightStart = Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)
+	static var lightEnd = Color(red: 200 / 255, green: 200 / 255, blue: 205 / 255)
+	static let darkStart = Color(red: 50 / 255, green: 50 / 255, blue: 70 / 255)
+	static let darkEnd = Color(red: 20 / 255, green: 20 / 255, blue: 20 / 255)
+	
 	
 }
 
@@ -33,7 +35,7 @@ struct LightButtonStyle<S: Shape>: ButtonStyle {
 				
 				
 		)
-			.animation(nil)
+			
 	}
 }
 
@@ -48,8 +50,8 @@ struct LightBackground<S: Shape>: View {
 					.fill(LinearGradient(Color.lightEnd, Color.lightStart))
 					.overlay(shape.stroke(LinearGradient(Color.lightStart, Color.lightEnd), lineWidth: 4).blur(radius: 0.3))
 					.overlay(shape.stroke(LinearGradient(Color.lightStart, Color.lightEnd), lineWidth: 0.3))
-					.shadow(color: Color.lightStart, radius: 10, x: 10, y: 10)
-					.shadow(color: Color.lightEnd, radius: 10, x: -10, y: -10)
+					.shadow(color: Color.lightStart, radius: 8, x: 8, y: 8)
+					.shadow(color: Color.lightEnd, radius: 8, x: -10, y: -10)
 				
 			}
 			else {

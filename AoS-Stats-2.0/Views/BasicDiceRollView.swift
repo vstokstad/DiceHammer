@@ -11,6 +11,7 @@ import SwiftUI
 import Combine
 import CoreHaptics
 import UIKit
+import MultipeerKit
 
 
 struct diceShake: GeometryEffect {
@@ -27,9 +28,13 @@ struct diceShake: GeometryEffect {
 }
 
 
+
 struct BasicDiceRollView: View {
+	@Environment(\.presentationMode) var presentationMode
 	@Environment(\.managedObjectContext) var moc
 	@EnvironmentObject var dice: Dice
+	@EnvironmentObject var dataSource: MultipeerDataSource
+
 	var diceSize = Dice.diceSize
 	
 	
@@ -45,7 +50,13 @@ struct BasicDiceRollView: View {
 	private let diceRange = 0.0...100.0
 	@State private var rerolls = [false, false, false, false]
 	@State private var rerollCount = 0
-	
+	func HitRolls(hitRolls: [Dice]) -> [Int] {
+		var hitRollsToSend = [Int]()
+		for roll in hitRolls {
+			hitRollsToSend.append(roll.value)
+		}
+		return hitRollsToSend
+	}
 	//	DiceArrays and sorting for viewing in columns
 	@State private var ones: [Dice] = [Dice]()
 	@State private var twos: [Dice] = [Dice]()
@@ -146,6 +157,7 @@ struct BasicDiceRollView: View {
 		}
 	}
 	
+	@State private var connectSheetIsPresented = false
 	
 	var body: some View {
 		
@@ -154,19 +166,24 @@ struct BasicDiceRollView: View {
 				.edgesIgnoringSafeArea(.all)
 			VStack{
 				HStack{
-					Text("Basic Dice Roller")
-						.font(.title)
+					Text("DiceHammer")
+						.font(.title).bold()
 						.padding(.horizontal, 10)
 			Spacer()
+					Button("Connect"){
+						self.connectSheetIsPresented.toggle()
+					}
+					.padding(.horizontal, 10)
+					.sheet(isPresented: self.$connectSheetIsPresented){
+						ConnectView(dataSource: self._dataSource, payload: DicePackage(hitRolls: self.HitRolls(hitRolls: self.hitRolls), hits: self.hits, misses: Int(self.numberOfDice)-self.hits, rerolls: self.rerollCount))
+					}
 				}
 				
 				
 				ScrollView(showsIndicators: true){
-					
-					
+
 					//	Header & Dice
 					Group{
-						
 						// Number of Dice
 						VStack{
 							HStack{
@@ -174,24 +191,6 @@ struct BasicDiceRollView: View {
 								Text("Dice: \(self.numberOfDice, specifier: "%.0f")")
 									
 								Spacer()
-							
-//								Button("-"){
-//									if self.numberOfDice != 0 {
-//										self.numberOfDice -= 1.0
-//									}
-//								}
-//								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-//
-//
-//
-//								Button("+"){
-//									if self.numberOfDice != 100 {
-//										self.numberOfDice += 1.0
-//									}
-//								}
-//								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 10)))
-//
-//								Spacer()
 							}
 							
 							Slider(value: $numberOfDice, in: diceRange, step: 1.0)
@@ -199,23 +198,28 @@ struct BasicDiceRollView: View {
 							
 						}
 						.padding(.horizontal)
-					
 					}
+					
 					//	DynamiDiceView
 					HStack(alignment: .top, spacing: 2, content: {
 						VStack{
 							if ones.count != 0 {
 								Text("\(ones.count)").font(.caption)
 							ForEach(ones, id: \.id){ dice in
-								DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
-							}
+								DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)
+									.onAppear(){self.diceSelected.toggle()}
+									.modifier(diceShake(position: self.diceSelected ? 1 : 0))
+									.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
+								}
 						}
 						}
 						VStack{
 							if twos.count != 0 {
 								Text("\(twos.count)").font(.caption)
 								ForEach(twos, id: \.id){ dice in
-									DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+									DynamicDice(value: dice.value, diceSelected: self.diceSelected).dynamicDice(value: dice.value)
+										.modifier(diceShake(position: self.diceSelected ? 1 : 0))
+										.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
 							}
 							}
 							
@@ -224,7 +228,9 @@ struct BasicDiceRollView: View {
 							if threes.count != 0 {
 								Text("\(threes.count)").font(.caption)
 							ForEach(threes, id: \.id){ dice in
-								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)
+									.modifier(diceShake(position: self.diceSelected ? 1 : 0))
+									.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
 							}
 							}
 							
@@ -233,7 +239,8 @@ struct BasicDiceRollView: View {
 							if fours.count != 0 {
 								Text("\(fours.count)").font(.caption)
 							ForEach(fours, id: \.id){ dice in
-								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+								DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value).modifier(diceShake(position: self.diceSelected ? 1 : 0))
+									.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
 							}
 						}
 						}
@@ -241,7 +248,8 @@ struct BasicDiceRollView: View {
 							if fives.count != 0 {
 									Text("\(fives.count)").font(.caption)
 						ForEach(fives, id: \.id){ dice in
-							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)	.onAppear(){	self.diceSelected.toggle()}
+							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value).modifier(diceShake(position: self.diceSelected ? 1 : 0))
+								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
 							
 						}
 						}
@@ -251,9 +259,10 @@ struct BasicDiceRollView: View {
 								Text("\(sixes.count)").font(.caption)
 						ForEach(sixes, id: \.id){ dice in
 							DynamicDice(value: dice.value, diceSelected: self.$diceSelected.wrappedValue).dynamicDice(value: dice.value)
-								.onAppear(){	self.diceSelected.toggle()}
+								.modifier(diceShake(position: self.diceSelected ? 1 : 0))
+								.animation(Animation.default.repeatCount(Int.random(in: 1...10)).speed(Double(Int.random(in: 3...10))))
 								
-								.foregroundColor(.black)
+								
 							
 						}
 						}
@@ -264,9 +273,8 @@ struct BasicDiceRollView: View {
 					}
 						.onTapGesture {
 							self.DiceHaptic()
-
+							self.diceSelected.toggle()
 						}
-					
 				}
 				
 				VStack{
@@ -330,7 +338,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[0] = false
-									self.showRerolls.toggle()
+									
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -342,7 +350,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[3] = false
-									self.showRerolls.toggle()
+									
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -353,7 +361,7 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[2] = false
-									self.showRerolls.toggle()
+									
 									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
@@ -365,18 +373,19 @@ struct BasicDiceRollView: View {
 									self.hitCalc()
 									self.DiceValues()
 									self.rerolls[1] = false
-									self.showRerolls.toggle()
+									
 								}
 								.buttonStyle(LightButtonStyle(shape: Circle()))
 								.font(.caption)
 								
 							
 							}
-						.animation(nil)
+						
 						.padding()
 						}
 						}
 					}
+					.drawingGroup()
 					
 			
 					
@@ -391,7 +400,7 @@ struct BasicDiceRollView: View {
 								.font(.caption)
 								.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 20)))
 								
-							.animation(nil)
+						
 								
 								
 							}
@@ -403,7 +412,7 @@ struct BasicDiceRollView: View {
 							for _ in 0..<Int(self.numberOfDice) {
 								self.hitRolls.append(Dice())
 								
-									self.diceSelected.toggle()
+								self.diceSelected.toggle()
 							}
 							self.DiceValues()
 							self.rerollCount = 0
@@ -413,27 +422,28 @@ struct BasicDiceRollView: View {
 						.buttonStyle(LightButtonStyle(shape: Circle()))
 						.padding()
 						
+						
 						Button("Roll kept") {
 							self.hitRolls.removeAll(keepingCapacity: false)
-							
+					
 							
 							for _ in 0..<self.hits {
 								self.hitRolls.append(Dice())
 								
-								self.diceSelected.toggle()
+								
 							}
 							
 							self.DiceValues()
 							self.hitCalc()
-							self.showRerolls.toggle()
+							self.diceSelected.toggle()
 						}
 						.buttonStyle(LightButtonStyle(shape: RoundedRectangle(cornerRadius: 20)))
-							
 						.font(.caption)
-						.multilineTextAlignment(.center)
 						.disabled(self.hits==0)
 						
-					}}.offset(x: 0, y: 0).frame(width: UIScreen.main.bounds.width).background(LightBackground(isHighlighted: false, shape: RoundedRectangle(cornerRadius: 10.0))).edgesIgnoringSafeArea(.bottom)
+					}
+					
+					}.offset(x: 0, y: 0).frame(width: UIScreen.main.bounds.width).background(LightBackground(isHighlighted: false, shape: Rectangle())).edgesIgnoringSafeArea(.top).drawingGroup()
 				
 				
 				
@@ -449,7 +459,7 @@ struct BasicDiceRollView: View {
 struct BasicDiceRollView_Previews: PreviewProvider {
 	
 	static var previews: some View {
-		BasicDiceRollView().environmentObject(Dice())
+	ContentView()
 		
 	}
 }

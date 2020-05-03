@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,9 @@
 		7C682D7323D324380028A496 /* AoS_Stats_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7223D324380028A496 /* AoS_Stats_2_0Tests.swift */; };
 		7C682D7E23D324380028A496 /* AoS_Stats_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */; };
 		7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D8B23D63CD40028A496 /* AvgDmg.swift */; };
+		7C761079244B87E6006AFD82 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C761078244B87E6006AFD82 /* ConnectView.swift */; };
+		7C7610A9244B8AA4006AFD82 /* DicePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7610A8244B8AA4006AFD82 /* DicePackage.swift */; };
+		7C7610AC244B8C98006AFD82 /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7C7610AB244B8C98006AFD82 /* MultipeerKit */; };
 		7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92E5AD240053290017C838 /* BasicDiceRollView.swift */; };
 		7CB12D572409073400B7A858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D562409073400B7A858 /* AppDelegate.swift */; };
 		7CB12D592409073400B7A858 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D582409073400B7A858 /* SceneDelegate.swift */; };
@@ -57,7 +60,7 @@
 		7C3CD43E24111FCE007239CE /* AvgDmgCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmgCalcView.swift; sourceTree = "<group>"; };
 		7C3CD4402411404C007239CE /* AddUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUnitView.swift; sourceTree = "<group>"; };
 		7C61DD5123FEFEB000F07CE9 /* SavedProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SavedProfilesView.swift; path = "AoS-Stats-2.0/Views/AvgDmgCalc/SavedProfilesView.swift"; sourceTree = SOURCE_ROOT; };
-		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C682D5523D324370028A496 /* AoS-Stats-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoS-Stats-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C682D5823D324370028A496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C682D5A23D324370028A496 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7C682D5D23D324370028A496 /* AoS_Stats_2_0.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = AoS_Stats_2_0.xcdatamodel; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 		7C682D7D23D324380028A496 /* AoS_Stats_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoS_Stats_2_0UITests.swift; sourceTree = "<group>"; };
 		7C682D7F23D324380028A496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C682D8B23D63CD40028A496 /* AvgDmg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvgDmg.swift; sourceTree = "<group>"; };
+		7C761078244B87E6006AFD82 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectView.swift; path = "AoS-Stats-2.0/Views/ConnectView.swift"; sourceTree = SOURCE_ROOT; };
+		7C7610A8244B8AA4006AFD82 /* DicePackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DicePackage.swift; path = AvgDmgCalc/MultipeerSender/MultipeerSender/DicePackage.swift; sourceTree = "<group>"; };
 		7C92E5AD240053290017C838 /* BasicDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDiceRollView.swift; sourceTree = "<group>"; };
 		7CB12D542409073400B7A858 /* NeoMorph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoMorph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB12D562409073400B7A858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C7610AC244B8C98006AFD82 /* MultipeerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +130,8 @@
 			children = (
 				7CE599462416CD5D00E8D68A /* AvgDmgCalc */,
 				7C682D5F23D324370028A496 /* ContentView.swift */,
+				7C761078244B87E6006AFD82 /* ConnectView.swift */,
+				7C7610A8244B8AA4006AFD82 /* DicePackage.swift */,
 				7C92E5AD240053290017C838 /* BasicDiceRollView.swift */,
 				7CE0501B242019D500C4AE56 /* DynamicDiceView.swift */,
 			);
@@ -254,6 +262,9 @@
 			dependencies = (
 			);
 			name = "AoS-Stats-2.0";
+			packageProductDependencies = (
+				7C7610AB244B8C98006AFD82 /* MultipeerKit */,
+			);
 			productName = "AoS-Stats-2.0";
 			productReference = 7C682D5523D324370028A496 /* AoS-Stats-2.0.app */;
 			productType = "com.apple.product-type.application";
@@ -346,6 +357,9 @@
 				Base,
 			);
 			mainGroup = 7C682D4C23D324370028A496;
+			packageReferences = (
+				7C7610AA244B8C98006AFD82 /* XCRemoteSwiftPackageReference "MultipeerKit" */,
+			);
 			productRefGroup = 7C682D5623D324370028A496 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -402,7 +416,9 @@
 			files = (
 				7CF9AC1923FF36FC001214AD /* AddWeaponView.swift in Sources */,
 				7CBF7D7B2406C84A003E2A05 /* CombineProfileView.swift in Sources */,
+				7C7610A9244B8AA4006AFD82 /* DicePackage.swift in Sources */,
 				7C682D5E23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld in Sources */,
+				7C761079244B87E6006AFD82 /* ConnectView.swift in Sources */,
 				7C682D5923D324370028A496 /* AppDelegate.swift in Sources */,
 				7C682D6023D324370028A496 /* ContentView.swift in Sources */,
 				7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */,
@@ -606,6 +622,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -627,6 +644,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "Vilhelm-Stokstad.AoS-Stats-2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -811,6 +829,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C7610AA244B8C98006AFD82 /* XCRemoteSwiftPackageReference "MultipeerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:insidegui/MultipeerKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7C7610AB244B8C98006AFD82 /* MultipeerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C7610AA244B8C98006AFD82 /* XCRemoteSwiftPackageReference "MultipeerKit" */;
+			productName = MultipeerKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		7C682D5C23D324370028A496 /* AoS_Stats_2_0.xcdatamodeld */ = {
