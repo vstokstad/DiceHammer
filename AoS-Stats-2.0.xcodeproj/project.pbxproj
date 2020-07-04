@@ -24,7 +24,7 @@
 		7C682D8C23D63CD40028A496 /* AvgDmg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C682D8B23D63CD40028A496 /* AvgDmg.swift */; };
 		7C761079244B87E6006AFD82 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C761078244B87E6006AFD82 /* ConnectView.swift */; };
 		7C7610A9244B8AA4006AFD82 /* DicePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7610A8244B8AA4006AFD82 /* DicePackage.swift */; };
-		7C7610AC244B8C98006AFD82 /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7C7610AB244B8C98006AFD82 /* MultipeerKit */; };
+		7C7610AC244B8C98006AFD82 /* MultipeerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7C7610AB244B8C98006AFD82 /* MultipeerKit */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7C92E5AE240053290017C838 /* BasicDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92E5AD240053290017C838 /* BasicDiceRollView.swift */; };
 		7CB12D572409073400B7A858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D562409073400B7A858 /* AppDelegate.swift */; };
 		7CB12D592409073400B7A858 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB12D582409073400B7A858 /* SceneDelegate.swift */; };

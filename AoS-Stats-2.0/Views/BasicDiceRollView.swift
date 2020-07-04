@@ -199,7 +199,7 @@ struct BasicDiceRollView: View {
 						}
 						.padding(.horizontal)
 					}
-					
+					ZStack{
 					//	DynamiDiceView
 					HStack(alignment: .top, spacing: 2, content: {
 						VStack{
@@ -267,7 +267,7 @@ struct BasicDiceRollView: View {
 						}
 						}
 						}
-					})
+						}).padding()}.drawingGroup()
 						.onAppear(){
 							self.DiceHaptic()
 					}

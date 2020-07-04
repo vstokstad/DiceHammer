@@ -66,6 +66,7 @@ class DynamicDice: ObservableObject {
 					
 					.shadow(color: Color.lightEnd, radius: 5, x: 5, y: 5)
 					.shadow(color: Color.lightStart, radius: 5, x: -5, y: -5)
+				
 				}
 				else if value == 3 {
 								ZStack {
@@ -236,7 +237,7 @@ class DynamicDice: ObservableObject {
 							
 			}
 		}
-	return dice
+		return dice
 	}
 	init(value: Int, diceSelected: Bool) {
 		self.value = value
